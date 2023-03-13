@@ -1,10 +1,11 @@
-import { connectors, provider } from '@/config/wagmi';
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import { createClient, WagmiConfig } from 'wagmi'
+import { Navbar } from "@/components/Navbar/navbar";
+import { connectors, provider } from "@/config/wagmi";
+import "@/styles/globals.css";
+import { ChakraProvider } from "@chakra-ui/react";
+import type { AppProps } from "next/app";
+import { createClient, WagmiConfig } from "wagmi";
 
 export default function App({ Component, pageProps }: AppProps) {
-  
   const client = createClient({
     autoConnect: true,
     provider: provider,
@@ -12,8 +13,11 @@ export default function App({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <WagmiConfig client={client}>
-      <Component {...pageProps} />
-    </WagmiConfig>
+    <ChakraProvider resetCSS>
+      <WagmiConfig client={client}>
+        <Navbar />
+        <Component {...pageProps} />
+      </WagmiConfig>
+    </ChakraProvider>
   );
 }
