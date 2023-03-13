@@ -66,7 +66,8 @@ const ProfileSubMenu = () => {
           size="md"
           fontWeight="500"
           variant="outline"
-          _hover={{ bg: "blackAlpha.300", color: "white" }}
+          color="black"
+          _hover={{ bg: "pink.300", color: "white" }}
           leftIcon={<RiUserFill />}
           fontSize="sm"
           rightIcon={<FaChevronDown />}
