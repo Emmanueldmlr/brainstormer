@@ -5,6 +5,14 @@ import {
   Stack,
   ListItem,
   UnorderedList,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
+  Tfoot,
+  Th,
+  Thead,
+  Tr,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React from "react";
@@ -93,6 +101,64 @@ export default function QuizReport() {
           h={{ base: "72px", lg: "8.125em" }}
           w={{ base: "72px", lg: "154px" }}
         />
+      </Flex>
+
+      <Flex w="full" direction="column" px="3">
+        <Text
+          textAlign={{ base: "center", lg: "left" }}
+          fontSize={{ base: "sm", lg: "md" }}
+          fontWeight="medium"
+          pb="5"
+        >
+          Your Quiz Report ( By Categories )
+        </Text>
+        <TableContainer>
+          <Table size="md">
+            <Thead>
+              <Tr>
+                <Th fontWeight="bold" color="black">
+                  Quiz Topics
+                </Th>
+                <Th fontWeight="bold" color="black">
+                  {" "}
+                  IQ earned (IQ)
+                </Th>
+                <Th fontWeight="bold" color="black">
+                  Total Mark
+                </Th>
+                <Th fontWeight="bold" color="black">
+                  Total Time spent
+                </Th>
+                <Th fontWeight="bold" color="black">
+                  Latest Quiz Date
+                </Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>People In Crypto</Td>
+                <Td>1200 </Td>
+                <Td> 534/1000</Td>
+                <Td>2:05:47</Td>
+                <Td>10/02/2023</Td>
+              </Tr>
+              <Tr>
+                <Td>Defi</Td>
+                <Td>200 </Td>
+                <Td> 48/100</Td>
+                <Td>23:07</Td>
+                <Td>24/05/2023</Td>
+              </Tr>
+              <Tr>
+                <Td>Cryptocurrencies</Td>
+                <Td>690 </Td>
+                <Td> 410/700</Td>
+                <Td>33:04</Td>
+                <Td>16/01/2023</Td>
+              </Tr>
+            </Tbody>
+          </Table>
+        </TableContainer>
       </Flex>
     </Stack>
   );

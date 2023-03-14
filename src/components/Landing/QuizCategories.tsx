@@ -8,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 
 const QuizCategories = () => {
@@ -52,9 +53,11 @@ const QuizCategories = () => {
               features,funding and other related topics is important to passing
               the quiz.
             </Text>
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+            <Link href="/Report/QuizReport">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/dapps.jpg" width="30%" />
         </HStack>
@@ -155,6 +158,7 @@ const QuizCategories = () => {
               cryptocurrencies from Bitcoin to IQ. A good insight into their
               history, technology and feature will earn you estra IQ tokens.
             </Text>
+
             <Text color="#ff5caa" py="3" fontWeight="bold">
               Start Quiz
             </Text>
