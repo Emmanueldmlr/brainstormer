@@ -16,7 +16,7 @@ import ProfileSubMenu from "./ProfileSubMenu";
 import WalletConnect from "./WalletConnect";
 import { NetworkNotification } from "./NetworkNotification";
 import { utils } from "ethers";
-import { RiMenu3Fill } from "react-icons/ri";
+import { RiFilePaper2Fill, RiMenu3Fill } from "react-icons/ri";
 import dynamic from "next/dynamic";
 
 export const Navbar = () => {
@@ -82,6 +82,28 @@ export const Navbar = () => {
           </Flex>
         </NextLink>
         <Spacer />
+        <>
+          {isUserConnected && (
+            <NextLink href="/Report/QuizReport" passHref>
+              <Button
+                size="md"
+                disabled
+                fontSize="sm"
+                px="4"
+                fontWeight="medium"
+                bg="white"
+                border="1px"
+                borderColor="gray.100"
+              >
+                <RiFilePaper2Fill fontSize="20px" color="#ff5caa" />
+                <Text fontWeight="semibold" color="black" px="2">
+                  Quiz Report
+                </Text>
+              </Button>
+            </NextLink>
+          )}
+        </>
+
         <HStack display={{ base: "none", lg: "unset" }} spacing="5">
           <>
             {!isUserConnected ? (

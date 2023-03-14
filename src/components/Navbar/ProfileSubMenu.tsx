@@ -79,7 +79,7 @@ const ProfileSubMenu = () => {
   //     });
   //   }
   // }, [userBalance]);
-  
+
   const { hasCopied, onCopy: copyAddress } = useClipboard(address as string);
 
   return (
