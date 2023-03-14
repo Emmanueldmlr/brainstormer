@@ -10,6 +10,7 @@ const Herosection = () => {
       }}
       bgPos="center"
       bgSize="cover !important"
+      bgColor="#dddddd19"
     >
       <Flex
         py={{ md: 20, base: 24 }}

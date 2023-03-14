@@ -15,11 +15,14 @@ import { GiCash } from "react-icons/gi";
 
 const Iqlearn = () => {
   return (
-    <Box w="full" py="20" px="2">
+    <Box w="full" py="20" px="2" bg="#dddddd19">
       <chakra.div textAlign="center" w="full">
-        <Text fontSize="2xl" fontWeight="semibold">
+        <Heading
+          fontSize={{ lg: "3xl", md: "2xl", base: "xl", "2xl": "4xl" }}
+          mb={{ base: 6 }}
+        >
           How does the IQ Wiki Learn to Earn program work?
-        </Text>
+        </Heading>
       </chakra.div>
       <SimpleGrid
         maxW="1050px"
@@ -35,7 +38,7 @@ const Iqlearn = () => {
         spacingY={12}
         px={6}
       >
-        <VStack px="2" shadow="base" py="5" textAlign="center" rounded="lg">
+        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
           <BsFillDatabaseFill fontSize="30px" color="#ff5caa " />
           <Text fontWeight="600" fontSize="20px">
             Stake Coins
@@ -45,7 +48,7 @@ const Iqlearn = () => {
             You must have some staked IQ to earn from the program
           </Text>
         </VStack>
-        <VStack px="2" shadow="base" py="5" textAlign="center" rounded="lg">
+        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
           <RiWallet3Fill fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Connect Wallet
@@ -55,7 +58,7 @@ const Iqlearn = () => {
             For easy remittance of IQ tokens
           </Text>
         </VStack>
-        <VStack px="2" shadow="base" py="5" textAlign="center" rounded="lg">
+        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
           <RiFilePaper2Fill fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Take Quiz
@@ -65,7 +68,7 @@ const Iqlearn = () => {
             Put Your newfound knowledge to test
           </Text>
         </VStack>
-        <VStack px="2" shadow="base" py="5" textAlign="center" rounded="lg">
+        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
           <GiCash fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Cash Out
