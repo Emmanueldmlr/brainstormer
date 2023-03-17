@@ -1,3 +1,4 @@
+import Footer from "@/components/Landing/Footer/Footer";
 import { Navbar } from "@/components/Navbar/navbar";
 import { connectors, provider } from "@/config/wagmi";
 import "@/styles/globals.css";
@@ -17,6 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <WagmiConfig client={client}>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </WagmiConfig>
     </ChakraProvider>
   );

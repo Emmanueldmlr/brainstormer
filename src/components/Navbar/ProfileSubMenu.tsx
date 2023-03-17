@@ -84,18 +84,6 @@ const ProfileSubMenu = () => {
 
   return (
     <HStack>
-      <Button
-        size="md"
-        disabled
-        fontSize="sm"
-        px="4"
-        fontWeight="medium"
-        bg="pink.300"
-        color="white"
-      >
-        <chakra.div h="2" w="2" rounded="full" bg="#a9b8ef" mr="2"></chakra.div>
-        Wallet Connected
-      </Button>
       <Popover>
         <PopoverTrigger>
           <Button
@@ -103,7 +91,6 @@ const ProfileSubMenu = () => {
             fontWeight="500"
             variant="outline"
             color="black"
-            _hover={{ bg: "pink.300", color: "white" }}
             leftIcon={<RiUserFill />}
             fontSize="sm"
             rightIcon={<FaChevronDown />}
@@ -187,9 +174,9 @@ const ProfileSubMenu = () => {
             })}
           />
           <SubMenuItem
-            label="View on Etherscan"
+            label="View on MumbaiScan"
             action={() =>
-              window.open(`https://etherscan.io/address/${address}`, "_blank")
+              window.open(`https://mumbai.polygonscan.com/address/${address}`, "_blank")
             }
             icon={RiExternalLinkLine}
           />
@@ -200,6 +187,19 @@ const ProfileSubMenu = () => {
           />
         </PopoverContent>
       </Popover>
+      <Button
+        size="md"
+        disabled
+        fontSize="sm"
+        px="4"
+        fontWeight="medium"
+        bg="pink.300"
+        color="white"
+        _hover={{ color: "white", bg: "pink.300" }}
+      >
+        <chakra.div h="2" w="2" rounded="full" bg="#a9b8ef" mr="2"></chakra.div>
+        Wallet Connected
+      </Button>
     </HStack>
   );
 };

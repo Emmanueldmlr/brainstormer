@@ -1,4 +1,3 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import {
   Container,
   Stack,
@@ -25,13 +24,29 @@ const Footer = () => {
         py={5}
       >
         <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={spacing} py={10}>
-          <GridItem></GridItem>
+          <GridItem>
+            <Flex
+              gap="3"
+              justifyContent="start"
+              color="white"
+              direction="column"
+            >
+              <Text fontSize="xl" fontWeight="bold" py={2}>
+                IQ WIKI QUIZ
+              </Text>
+              <Text>
+                THE WORLD’S BEST CRYPTO LEARN TO EARN PLATFORM The biggest
+                rewarding system with incorporated auto-claim feature, learning
+                just got fascinating with IQ Wiki !!
+              </Text>
+            </Flex>
+          </GridItem>
           <GridItem>
             <SocialFooter />
           </GridItem>
         </SimpleGrid>
         <Divider orientation="horizontal" />
-        <SimpleGrid fontSize="sm" columns={{ base: 1, lg: 2 }}>
+        <SimpleGrid fontSize="sm" columns={{ base: 1, lg: 2 }} color="white">
           <Stack align={{ base: "center", lg: "flex-start" }} flex="1">
             <Flex
               alignItems="center"

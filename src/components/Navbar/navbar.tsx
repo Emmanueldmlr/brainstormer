@@ -29,12 +29,12 @@ export const Navbar = () => {
       image: "/polygon.png",
       name: "Polygon",
       isActive: true,
-      chainNoHex: 137,
-      chainId: utils.hexValue(137),
-      chainName: "Polygon Mainnet",
+      chainNoHex: 80001,
+      chainId: utils.hexValue(80001),
+      chainName: "Polygon Testnet Mumbai",
       nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
-      rpcUrls: ["https://polygon-rpc.com/"],
-      blockExplorerUrls: ["https://polygonscan.com"],
+      rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com"],
     },
   ];
   const [currentNetwork, setCurrentNetwork] = useState(NETWORK_DATA[0]);
@@ -48,12 +48,20 @@ export const Navbar = () => {
 
   useEffect(() => {
     CheckNetwork();
+    console.log(isUserConnected);
   }, [isUserConnected, currentNetwork]);
 
   const Logo = dynamic(() => import("../Elements/IqLogo"));
+
   const CheckNetwork = () => {
     if (isUserConnected && chain?.id !== currentNetwork.chainNoHex) {
       onOpenSwitch();
+      console.log(
+        isUserConnected,
+        isUserConnected,
+        chain?.id,
+        currentNetwork.chainNoHex
+      );
     }
   };
 

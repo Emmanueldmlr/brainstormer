@@ -10,7 +10,6 @@ export default function Home() {
       <Herosection />
       <Iqlearn />
       <QuizCategories />
-      <Footer />
     </Box>
   );
 }

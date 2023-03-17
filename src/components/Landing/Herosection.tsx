@@ -29,7 +29,7 @@ const Herosection = () => {
         </Heading>
         <Text fontSize={{ "2xl": "2xl", md: "lg", base: "md" }}>
           The biggest rewarding system with incorporated auto-claim feature,
-          learning just got fascinating with IQ Wik!!i
+          learning just got fascinating with IQ Wiki !!
         </Text>
       </Flex>
     </Box>

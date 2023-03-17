@@ -12,6 +12,7 @@ import React from "react";
 import { FocusableElement } from "@chakra-ui/utils";
 import { RiErrorWarningFill, RiCloseLine } from "react-icons/ri";
 import { utils } from "ethers";
+import { useSwitchNetwork } from "wagmi";
 
 export const NetworkNotification = ({
   onClose,
@@ -21,49 +22,24 @@ export const NetworkNotification = ({
   onClose: () => void;
 }) => {
   const cancelRef = React.useRef<FocusableElement>(null);
-
+  const { switchNetwork, isSuccess } = useSwitchNetwork();
   const NETWORK_DATA = {
     id: 1,
     image: "/polygon.png",
     name: "Polygon",
     isActive: true,
-    chainNoHex: 137,
-    chainId: utils.hexValue(137),
-    chainName: "Polygon Mainnet",
+    chainNoHex: 80001,
+    chainId: utils.hexValue(80001),
+    chainName: "Polygon Testnet Mumbai",
     nativeCurrency: { name: "MATIC", symbol: "MATIC", decimals: 18 },
-    rpcUrls: ["https://polygon-rpc.com/"],
-    blockExplorerUrls: ["https://polygonscan.com"],
+    rpcUrls: ["https://matic-mumbai.chainstacklabs.com"],
+    blockExplorerUrls: ["https://mumbai.polygonscan.com"],
   };
-  const { chainId, chainName, rpcUrls } = NETWORK_DATA;
+  const { chainNoHex } = NETWORK_DATA;
 
-  const handleSwitchNetwork = async () => {
-    try {
-      await window.ethereum?.request({
-        method: "wallet_switchEthereumChain",
-        params: [{ chainId }],
-      });
-      onClose();
-    } catch (switchError) {
-      const err = switchError as Record<string, number>;
-      if (err.code === 4902) {
-        try {
-          await window.ethereum?.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainId,
-                chainName,
-                rpcUrls,
-              },
-            ],
-          });
-          onClose();
-        } catch (addError) {
-          return null;
-        }
-      }
-    }
-    return null;
+  const handleNetworkSwitch = () => {
+    if (switchNetwork) switchNetwork(chainNoHex);
+    if (isSuccess) onClose();
   };
 
   return (
@@ -99,8 +75,8 @@ export const NetworkNotification = ({
           </Flex>
           <Text mt="6" w="90%" lineHeight="2">
             Your wallet is currently connected to an unsupported network. To
-            continue with Polygon Mainnet, Switch the network in your wallet to
-            Polygon Mainnet.
+            continue with Polygon Mumbai Testnet, Switch the network in your
+            wallet to Polygon Mumbai Testnet.
           </Text>
           <Text mt="6" w="90%" lineHeight="2">
             Switch wallet if unable to change wallet network.
@@ -117,7 +93,7 @@ export const NetworkNotification = ({
             >
               Dismiss
             </Text>
-            <Button onClick={handleSwitchNetwork} variant="outline">
+            <Button onClick={handleNetworkSwitch} variant="outline">
               Switch Network
             </Button>
           </Flex>

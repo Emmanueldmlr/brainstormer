@@ -53,7 +53,7 @@ const QuizCategories = () => {
               features,funding and other related topics is important to passing
               the quiz.
             </Text>
-            <Link href="/Report/QuizReport">
+            <Link href="/Quiz/quizPage">
               <Text color="#ff5caa" py="3" fontWeight="bold">
                 Start Quiz
               </Text>
@@ -76,9 +76,12 @@ const QuizCategories = () => {
               auctioning. mechanics, features, Architecture and other relating
               sub-topics, will make you a good fit for this quiz
             </Text>
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+
+            <Link href="/Quiz/quizPage">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/nfts-card.png" width="30%" />
         </HStack>
@@ -97,9 +100,11 @@ const QuizCategories = () => {
               hence, proper knowledge on these companies, is aguarantee to doing
               well in this quiz.
             </Text>
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+            <Link href="/Quiz/quizPage">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/defi-card.png" width="30%" />
         </HStack>
@@ -118,9 +123,11 @@ const QuizCategories = () => {
               every of the individuals discussed on IQ.wiki is what is needed to
               do well in this quiz
             </Text>
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+            <Link href="/Quiz/quizPage">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/people-card.png" width="30%" />
         </HStack>
@@ -139,9 +146,11 @@ const QuizCategories = () => {
               knowledge of their history, products and other related headings,
               will make you stand out i this quiz.
             </Text>
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+            <Link href="/Quiz/quizPage">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/exchanges-card.png" width="30%" />
         </HStack>
@@ -159,9 +168,11 @@ const QuizCategories = () => {
               history, technology and feature will earn you estra IQ tokens.
             </Text>
 
-            <Text color="#ff5caa" py="3" fontWeight="bold">
-              Start Quiz
-            </Text>
+            <Link href="/Quiz/quizPage">
+              <Text color="#ff5caa" py="3" fontWeight="bold">
+                Start Quiz
+              </Text>
+            </Link>
           </Flex>
           <Image src="/categories/cryptocurrencies-card.png" width="30%" />
         </HStack>
