@@ -11,6 +11,7 @@ import {
   useDisclosure,
   VStack,
   HStack,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -44,8 +45,10 @@ const QuizPage = () => {
 
   const timerFinished = () => {
     toast({
-      title: `Timer Ended; Next Question`,
-      status: ,
+      title: "Timer Ended; Next Question.",
+      description: ".",
+      status: "warning",
+      duration: 4000,
       isClosable: true,
     });
     setTimeLeft(90);
