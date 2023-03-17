@@ -8,24 +8,106 @@ import {
   Text,
   Button,
   chakra,
+  useDisclosure,
+  VStack,
+  HStack,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
-import { BraindaoLogo3 } from "../../components/Icons/BraindaoLogo";
+import React, { useEffect, useState } from "react";
+import QuizModal from "./quizModal";
 
 const QuizPage = () => {
   const router = useRouter();
+  const toast = useToast();
   const category = router.query.quiz as string;
-  console.log(category);
+  const quizDisclosure = useDisclosure();
+  const { isOpen, onClose, onOpen } = quizDisclosure;
+  const [startQuiz, setStartQuiz] = useState(false);
+  const [disableNext, setDisableNext] = useState(true);
+  const [buttonText, setButtonTest] = useState("Continue");
+  const [questionAnswers, setQuestionAnswers] = useState([]);
+
+  const ContiueandNext = () => {
+    if (!startQuiz) {
+      setStartQuiz(true);
+      setButtonTest("Next");
+    }
+  };
+
+  const [timeLeft, setTimeLeft] = useState(90);
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
+  const timerFinished = () => {
+    toast({
+      title: `Timer Ended; Next Question`,
+      status: ,
+      isClosable: true,
+    });
+    setTimeLeft(90);
+  };
+  useEffect(() => {
+    if (startQuiz) {
+      const timer = setInterval(() => {
+        setTimeLeft((timeLeft) => {
+          if (timeLeft > 0) {
+            return timeLeft - 1;
+          } else {
+            clearInterval(timer);
+            timerFinished();
+            return 0;
+          }
+        });
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [timeLeft, startQuiz]);
+
   return (
-    <Box w="full" px="20" py="10">
-      <Heading
-        textAlign={{ base: "center", lg: "left" }}
-        fontSize={{ base: "xl", lg: "2xl" }}
-        pb="10"
-      >
-        QUIZ - {category}
-      </Heading>
+    <Box w="full" px="20" pt="3" pb="5">
+      {startQuiz && (
+        <Flex
+          color="#5C042E"
+          bg=" #FFE5F2"
+          py="2"
+          px="6"
+          gap="4"
+          alignItems="center"
+          fontWeight="semibold"
+          lineHeight="23px"
+        >
+          <Text fontSize={{ base: "sm", lg: "md" }}>Note:</Text>
+          <VStack w="full" alignItems="start">
+            <Text fontSize={{ base: "xs", lg: "sm" }}>
+              All questions must be answered <br />
+              Your answers will automatically be submitted, if time elapses.
+            </Text>
+          </VStack>
+        </Flex>
+      )}
+      <Flex justifyContent="space-between" alignItems="center" pt="12">
+        <Heading
+          textAlign={{ base: "center", lg: "left" }}
+          fontSize={{ base: "xl", lg: "2xl" }}
+          pb="5"
+        >
+          QUIZ - {"  "}
+          <chakra.span fontWeight="normal">{category}</chakra.span>
+        </Heading>
+        {startQuiz && (
+          <Text>
+            Remaining time :
+            <chakra.span color="pink.300" px="2" fontWeight="bold">
+              {formatTime(timeLeft)}
+            </chakra.span>
+          </Text>
+        )}
+      </Flex>
 
       <Flex
         gap={{ lg: "15" }}
@@ -118,7 +200,7 @@ const QuizPage = () => {
           </OrderedList>
         </Stack>
       </Flex>
-      <chakra.div w="full" pl="3" pt="10">
+      <chakra.div w="full" pl="3" pt="8">
         <Button
           size="lg"
           fontSize="sm"
@@ -128,10 +210,13 @@ const QuizPage = () => {
           fontWeight="medium"
           bg="pink.300"
           _hover={{ bg: "pink.500", color: "gray.100" }}
+          onClick={ContiueandNext}
         >
-          Continue
+          {buttonText}
         </Button>
       </chakra.div>
+
+      <QuizModal onClose={onClose} isOpen={isOpen} />
     </Box>
   );
 };
