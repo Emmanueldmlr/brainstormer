@@ -33,6 +33,7 @@ const QuizPage = () => {
       setStartQuiz(true);
       setButtonTest("Next");
     }
+    console.log("dcksmdcj");
   };
 
   const [timeLeft, setTimeLeft] = useState(90);
@@ -43,16 +44,6 @@ const QuizPage = () => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const timerFinished = () => {
-    toast({
-      title: "Timer Ended; Next Question.",
-      description: ".",
-      status: "warning",
-      duration: 4000,
-      isClosable: true,
-    });
-    setTimeLeft(90);
-  };
   useEffect(() => {
     if (startQuiz) {
       const timer = setInterval(() => {
@@ -61,7 +52,14 @@ const QuizPage = () => {
             return timeLeft - 1;
           } else {
             clearInterval(timer);
-            timerFinished();
+            toast({
+              title: "Timer Ended,Next Question.",
+              description: ".",
+              status: "warning",
+              duration: 4000,
+              isClosable: true,
+            });
+            setTimeLeft(90);
             return 0;
           }
         });
@@ -118,7 +116,6 @@ const QuizPage = () => {
         bg="#F8F8F9"
         h="fit-content"
         rounded="lg"
-        align={{ base: "start", lg: "center" }}
         direction={{ base: "column", lg: "row" }}
       >
         <Stack order={{ base: 1, lg: 0 }} px="10" gap="2">
@@ -127,76 +124,44 @@ const QuizPage = () => {
           </Text>
           <OrderedList>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 Total Number of Questions: <b>10</b>
               </Text>
             </ListItem>
             <ListItem py="2">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 Total time limit of <b>01:30</b>
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 Must be finished at a sitting, cannot be saved for later
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 Each question gives a total of <b>1 point</b>
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 Will not let you finish without attempting all questions except
                 in the case where your time elapses
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 There is a timer at the top of each question, ensure not to lose
                 track of time
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 One question will be displayed per page
               </Text>
             </ListItem>
             <ListItem py="1">
-              <Text
-                textAlign={{ base: "center", lg: "left" }}
-                fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="normal"
-              >
+              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
                 You can access previous question, within the alloted timeframe.
               </Text>
             </ListItem>
@@ -209,7 +174,9 @@ const QuizPage = () => {
           fontSize="sm"
           rounded="none"
           px="10"
+          isDisabled={disableNext}
           color="white"
+          variant="outline"
           fontWeight="medium"
           bg="pink.300"
           _hover={{ bg: "pink.500", color: "gray.100" }}
