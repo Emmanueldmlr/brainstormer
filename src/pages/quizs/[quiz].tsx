@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { BraindaoLogo3 } from "../../components/Icons/BraindaoLogo";
 
-const quizPage = () => {
+const QuizPage = () => {
   const router = useRouter();
   const category = router.query.quiz as string;
   console.log(category);
@@ -136,4 +136,4 @@ const quizPage = () => {
   );
 };
 
-export default quizPage;
+export default QuizPage;

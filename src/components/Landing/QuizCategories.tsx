@@ -39,8 +39,16 @@ const QuizCategories = () => {
         </Text>
       </Flex>
       <VStack w="full" px="24" mx="auto" gap="4" py="10">
-        {AllCategoriesData.map((item) => (
-          <HStack shadow="base" rounded="lg" py="2" px="6" w="full" h="56">
+        {AllCategoriesData.map((item, i) => (
+          <HStack
+            key={i}
+            shadow="base"
+            rounded="lg"
+            py="2"
+            px="6"
+            w="full"
+            h="56"
+          >
             <Flex gap="2" direction="column" alignItems="start" w="70%">
               <Text
                 fontWeight="700"

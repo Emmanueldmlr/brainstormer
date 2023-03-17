@@ -13,3 +13,6 @@ export const shortenText = (text: string) => {
   const length = 90;
   return text?.length > length ? `${text.substring(0, length)}...` : text;
 };
+
+export const shortenBalance = (balance: number | null) =>
+  typeof balance === "number" ? balance.toFixed(2) : balance;

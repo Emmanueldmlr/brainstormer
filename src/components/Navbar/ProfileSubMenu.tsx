@@ -13,6 +13,7 @@ import {
   ComponentWithAs,
   Icon,
   HStack,
+  IconProps,
 } from "@chakra-ui/react";
 import {
   RiLogoutBoxLine,
@@ -20,12 +21,18 @@ import {
   RiFileCopyLine,
   RiUserFill,
 } from "react-icons/ri";
-import { shortenAccount } from "@/utils/shorteningVars";
+import { shortenAccount, shortenBalance } from "@/utils/shorteningVars";
 import { useAccount, useDisconnect } from "wagmi";
 import { FaChevronDown } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 import { CheckIcon } from "@chakra-ui/icons";
 import { Polygon } from "../Icons/polygon";
+import { useFetchWalletBalance } from "../wallet/use-fetch-wallet-balance";
+import { TokenDetailsType } from "../wallet/types";
+import { getTokenValue, useHiIQBalance } from "../wallet/use-hiiiq-balance";
+import { fetchRateAndCalculateTotalBalance } from "../../utils/balance";
+import { tokenDetails } from "../wallet/wallet-data";
+import { BraindaoLogo3 } from "../Icons/BraindaoLogo";
 
 type SubMenuItemProps = {
   label: string;
@@ -52,6 +59,35 @@ const SubMenuItem = (props: SubMenuItemProps) => {
   );
 };
 
+type TokenItemProps = {
+  symbol?: string;
+  icon: (props: IconProps) => JSX.Element;
+  amount: number;
+  tokensArray: TokenDetailsType[] | null;
+};
+
+const TokenItem = (props: TokenItemProps) => {
+  const { icon, symbol, amount, tokensArray } = props;
+  if (!tokensArray) return null;
+  return (
+    <Flex align="center" px="13px" py="3.5" gap="2.5" w="full">
+      <Icon as={icon} boxSize="6" />
+      <Text fontWeight="bold">{symbol}</Text>
+      <Flex
+        ml="auto"
+        direction="column"
+        align="space-between"
+        textAlign="right"
+      >
+        <Text fontWeight="bold">{shortenBalance(amount)}</Text>
+        <Text fontWeight="bold" fontSize="sm" color="fadedText5">
+          ${shortenBalance(getTokenValue(tokensArray, symbol))}
+        </Text>
+      </Flex>
+    </Flex>
+  );
+};
+
 const ProfileSubMenu = () => {
   const { address, connector } = useAccount();
   const { disconnect } = useDisconnect();
@@ -59,26 +95,26 @@ const ProfileSubMenu = () => {
     disconnect();
   };
 
-  // const { userBalance } = useFetchWalletBalance(address);
-  // const [balanceBreakdown, setBalanceBreakdown] = useState<
-  //   TokenDetailsType[] | null
-  // >(null);
+  const { userBalance } = useFetchWalletBalance(address);
+  const [balanceBreakdown, setBalanceBreakdown] = useState<
+    TokenDetailsType[] | null
+  >(null);
 
-  // const { hiiq } = useHiIQBalance(address);
+  const { hiiq } = useHiIQBalance(address);
 
-  // const hiIQData = {
-  //   formatted: `${hiiq?.hiiqBalance}`,
-  //   symbol: `${hiiq?.symbol}`,
-  //   tokensArray: { price: hiiq?.totalUsdBalance ?? 0, token: "HiIQ" },
-  // };
+  const hiIQData = {
+    formatted: `${hiiq?.hiiqBalance}`,
+    symbol: `${hiiq?.symbol}`,
+    tokensArray: { price: hiiq?.totalUsdBalance ?? 0, token: "HiIQ" },
+  };
 
-  // useEffect(() => {
-  //   if (userBalance) {
-  //     fetchRateAndCalculateTotalBalance(userBalance).then((result) => {
-  //       setBalanceBreakdown(result);
-  //     });
-  //   }
-  // }, [userBalance]);
+  useEffect(() => {
+    if (userBalance) {
+      fetchRateAndCalculateTotalBalance(userBalance).then((result) => {
+        setBalanceBreakdown(result);
+      });
+    }
+  }, [userBalance]);
 
   const { hasCopied, onCopy: copyAddress } = useClipboard(address as string);
 
@@ -136,7 +172,7 @@ const ProfileSubMenu = () => {
                 </Text>
               </Flex>
 
-              {/* {balanceBreakdown &&
+              {balanceBreakdown &&
                 userBalance &&
                 userBalance.length !== 0 &&
                 userBalance?.map((details, key) => {
@@ -155,11 +191,11 @@ const ProfileSubMenu = () => {
               {hiiq && userBalance && userBalance.length !== 0 && (
                 <TokenItem
                   symbol={hiIQData?.symbol}
-                  icon={BraindaoLogo}
+                  icon={BraindaoLogo3}
                   amount={Number(hiiq?.hiiqBalance)}
                   tokensArray={[hiIQData?.tokensArray]}
                 />
-              )} */}
+              )}
             </Flex>
           </chakra.div>
 
@@ -176,7 +212,10 @@ const ProfileSubMenu = () => {
           <SubMenuItem
             label="View on MumbaiScan"
             action={() =>
-              window.open(`https://mumbai.polygonscan.com/address/${address}`, "_blank")
+              window.open(
+                `https://mumbai.polygonscan.com/address/${address}`,
+                "_blank"
+              )
             }
             icon={RiExternalLinkLine}
           />
