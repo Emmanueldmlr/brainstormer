@@ -9,10 +9,14 @@ import {
   Button,
   chakra,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { BraindaoLogo3 } from "../../components/Icons/BraindaoLogo";
 
 const quizPage = () => {
+  const router = useRouter();
+  const category = router.query.quiz as string;
+  console.log(category);
   return (
     <Box w="full" px="20" py="10">
       <Heading
@@ -20,7 +24,7 @@ const quizPage = () => {
         fontSize={{ base: "xl", lg: "2xl" }}
         pb="10"
       >
-        QUIZ - People in Cryptocurrency
+        QUIZ - {category}
       </Heading>
 
       <Flex
