@@ -27,16 +27,14 @@ const QuizPage = () => {
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
   const [questionAnswers, setQuestionAnswers] = useState([]);
+  const [timeLeft, setTimeLeft] = useState(90);
 
   const ContiueandNext = () => {
     if (!startQuiz) {
       setStartQuiz(true);
       setButtonTest("Next");
     }
-    console.log("dcksmdcj");
   };
-
-  const [timeLeft, setTimeLeft] = useState(90);
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -174,9 +172,8 @@ const QuizPage = () => {
           fontSize="sm"
           rounded="none"
           px="10"
-          isDisabled={disableNext}
+          isDisabled={startQuiz && disableNext}
           color="white"
-          variant="outline"
           fontWeight="medium"
           bg="pink.300"
           _hover={{ bg: "pink.500", color: "gray.100" }}
