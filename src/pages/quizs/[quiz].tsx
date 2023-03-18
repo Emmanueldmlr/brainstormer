@@ -26,9 +26,11 @@ const QuizPage = () => {
   const [questionNumber, setQuestionNumber] = useState(1);
   const [startQuiz, setStartQuiz] = useState(false);
   const [endQuiz, setEndQuiz] = useState(false);
+  const [reviewAnswers, setReviewAnswers] = useState(false);
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
   const [answers, setAnswers] = useState<string[]>([]);
+  const [RealAnswers, setRealAnswers] = useState<string[]>([]);
   const [questions, setQuestions] = useState(
     Questions[`Question ${questionNumber}`]
   );
@@ -79,6 +81,7 @@ const QuizPage = () => {
     }
     if (questionNumber === 10) {
       setEndQuiz(true);
+      setQuestionNumber(0);
       const realAnswers = Object.values(Questions)
         .map((question) => question.answer[0].id)
         .filter((answerId) => answerId !== undefined);
@@ -89,11 +92,24 @@ const QuizPage = () => {
         }
         return acc;
       }, 0);
-
+      setRealAnswers(realAnswers);
       setScore(count);
     }
   }, [timeLeft, questionNumber]);
 
+  const ReviewNext = () => {
+    const num = questionNumber + 1;
+    setQuestionNumber(num);
+    setQuestions(Questions[`Question ${num}`]);
+  };
+
+  const BgColor = (i: number) => {
+    if (RealAnswers[i] === answers[i]) {
+      return "green.300";
+    } else if (RealAnswers[i] !== answers[i]) {
+      return "red.300";
+    }
+  };
   return (
     <Box w="full" px="20" pt="3" pb="5">
       {startQuiz && (
@@ -239,7 +255,42 @@ const QuizPage = () => {
                   You scored {score} /10
                 </Text>
               </Box>
+              <Button
+                size="lg"
+                fontSize="sm"
+                rounded="none"
+                px="10"
+                color="white"
+                fontWeight="medium"
+                bg="pink.300"
+                _hover={{ bg: "pink.500", color: "gray.100" }}
+                onClick={() => setReviewAnswers(reviewAnswers)}
+              >
+                Review Answers
+              </Button>
             </Flex>
+          )}
+          {reviewAnswers && (
+            <>
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+                {`Question ${questionNumber} out of 10`}
+              </Text>
+              {questions.question.map((item, i) => (
+                <Checkbox
+                  key={i}
+                  colorScheme="pink"
+                  bg={BgColor(questionNumber)}
+                  isDisabled
+                  py={1}
+                  value={item.id}
+                >
+                  <chakra.span color="pink.300" px="2" fontWeight="bold">
+                    {item.id}
+                  </chakra.span>
+                  {item.question}
+                </Checkbox>
+              ))}
+            </>
           )}
         </Stack>
       </Flex>
@@ -256,6 +307,24 @@ const QuizPage = () => {
             bg="pink.300"
             _hover={{ bg: "pink.500", color: "gray.100" }}
             onClick={ContiueandNext}
+          >
+            {buttonText}
+          </Button>
+        </chakra.div>
+      )}
+
+      {reviewAnswers && (
+        <chakra.div w="full" pl="3" pt="8">
+          <Button
+            size="lg"
+            fontSize="sm"
+            rounded="none"
+            px="10"
+            color="white"
+            fontWeight="medium"
+            bg="pink.300"
+            _hover={{ bg: "pink.500", color: "gray.100" }}
+            onClick={ReviewNext}
           >
             {buttonText}
           </Button>
