@@ -222,13 +222,23 @@ const QuizPage = () => {
             </>
           )}
           {startQuiz && endQuiz && (
-            <Flex w="full" alignItems="center" justifyContent="center" gap="4">
+            <Flex
+              w="full"
+              alignItems="center"
+              direction="column"
+              justifyContent="center"
+              gap="4"
+              py="10"
+              px="3"
+            >
               <Text fontSize={{ base: "lg", lg: "2xl" }} fontWeight="medium">
                 Your Result
               </Text>
-              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
-                You scored {score} /10
-              </Text>
+              <Box bg="#ff5caa" w="full" p="4">
+                <Text fontSize={{ base: "md", lg: "xl" }} fontWeight="medium">
+                  You scored {score} /10
+                </Text>
+              </Box>
             </Flex>
           )}
         </Stack>
@@ -256,3 +266,5 @@ const QuizPage = () => {
 };
 
 export default QuizPage;
+
+/// will be calling api to send content and then recieve questions and answers
