@@ -12,6 +12,7 @@ import {
   VStack,
   HStack,
   useToast,
+  Checkbox,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -26,14 +27,48 @@ const QuizPage = () => {
   const [startQuiz, setStartQuiz] = useState(false);
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
-  const [questionAnswers, setQuestionAnswers] = useState([]);
+  const [questions, setQuestions] = useState([
+    { id: "A", question: "Choose Me", isAnswer: true },
+    { id: "B", question: "I like You", isAnswer: false },
+    { id: "C", question: "No  its me", isAnswer: false },
+    { id: "D", question: "Yes me!!!", isAnswer: false },
+  ]);
+
   const [timeLeft, setTimeLeft] = useState(90);
+  const [checked, setChecked] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(0);
 
   const ContiueandNext = () => {
     if (!startQuiz) {
       setStartQuiz(true);
       setButtonTest("Next");
+    } else if (startQuiz) {
+      nextQuestion();
     }
+  };
+
+  const nextQuestion = () => {
+    if (checked === 0) {
+      toast({
+        title: "Please pick an answer",
+        description: ".",
+        status: "warning",
+        duration: 4000,
+        isClosable: true,
+      });
+    }
+    setChecked(0);
+    setQuestionNumber(questionNumber + 1);
+    setDisableNext(true);
+    //set next question
+    setQuestions([
+      { id: "A", question: " No  its me", isAnswer: false },
+      { id: "B", question: "Yes me!!!", isAnswer: true },
+      { id: "C", question: "Choose Me", isAnswer: false },
+      { id: "D", question: " I like You", isAnswer: false },
+    ]);
+    setTimeLeft(90);
+    
   };
 
   const formatTime = (time: number) => {
@@ -52,12 +87,12 @@ const QuizPage = () => {
             clearInterval(timer);
             toast({
               title: "Timer Ended,Next Question.",
-              description: ".",
               status: "warning",
               duration: 4000,
               isClosable: true,
             });
-            setTimeLeft(90);
+            nextQuestion();
+
             return 0;
           }
         });
@@ -118,52 +153,78 @@ const QuizPage = () => {
       >
         <Stack order={{ base: 1, lg: 0 }} px="10" gap="2">
           <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
-            Instructions
+            {!startQuiz
+              ? "Instructions"
+              : `Question ${questionNumber} out of 10`}
           </Text>
-          <OrderedList>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                Total Number of Questions: <b>10</b>
-              </Text>
-            </ListItem>
-            <ListItem py="2">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                Total time limit of <b>01:30</b>
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                Must be finished at a sitting, cannot be saved for later
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                Each question gives a total of <b>1 point</b>
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                Will not let you finish without attempting all questions except
-                in the case where your time elapses
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                There is a timer at the top of each question, ensure not to lose
-                track of time
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                One question will be displayed per page
-              </Text>
-            </ListItem>
-            <ListItem py="1">
-              <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                You can access previous question, within the alloted timeframe.
-              </Text>
-            </ListItem>
-          </OrderedList>
+          {startQuiz ? (
+            <>
+              {questions.map((item, i) => (
+                <Checkbox
+                  onChange={() => {
+                    setChecked(i + 1);
+                    setDisableNext(false);
+                  }}
+                  key={i}
+                  colorScheme="pink"
+                  isChecked={checked === i + 1}
+                  py={1}
+                  value={item.id}
+                >
+                  <chakra.span color="pink.300" px="2" fontWeight="bold">
+                    {item.id}
+                  </chakra.span>
+                  {item.question}
+                </Checkbox>
+              ))}
+            </>
+          ) : (
+            <OrderedList>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  Total Number of Questions: <b>10</b>
+                </Text>
+              </ListItem>
+              <ListItem py="2">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  Total time limit of <b>01:30</b>
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  Must be finished at a sitting, cannot be saved for later
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  Each question gives a total of <b>1 point</b>
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  Will not let you finish without attempting all questions
+                  except in the case where your time elapses
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  There is a timer at the top of each question, ensure not to
+                  lose track of time
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  One question will be displayed per page
+                </Text>
+              </ListItem>
+              <ListItem py="1">
+                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                  You can access previous question, within the alloted
+                  timeframe.
+                </Text>
+              </ListItem>
+            </OrderedList>
+          )}
         </Stack>
       </Flex>
       <chakra.div w="full" pl="3" pt="8">
@@ -182,8 +243,6 @@ const QuizPage = () => {
           {buttonText}
         </Button>
       </chakra.div>
-
-      <QuizModal onClose={onClose} isOpen={isOpen} />
     </Box>
   );
 };
