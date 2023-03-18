@@ -8,22 +8,20 @@ import {
   Text,
   Button,
   chakra,
-  useDisclosure,
   VStack,
-  HStack,
   useToast,
   Checkbox,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import QuizModal from "./quizModal";
 
 const QuizPage = () => {
   const router = useRouter();
   const toast = useToast();
   const category = router.query.quiz as string;
-  const quizDisclosure = useDisclosure();
-  const { isOpen, onClose, onOpen } = quizDisclosure;
+  const [timeLeft, setTimeLeft] = useState(90);
+  const [checked, setChecked] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [startQuiz, setStartQuiz] = useState(false);
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
@@ -34,9 +32,13 @@ const QuizPage = () => {
     { id: "D", question: "Yes me!!!", isAnswer: false },
   ]);
 
-  const [timeLeft, setTimeLeft] = useState(90);
-  const [checked, setChecked] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
+
+
+  const formatTime = (time: number) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
 
   const ContiueandNext = () => {
     if (!startQuiz) {
@@ -68,13 +70,6 @@ const QuizPage = () => {
       { id: "D", question: " I like You", isAnswer: false },
     ]);
     setTimeLeft(90);
-    
-  };
-
-  const formatTime = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
   useEffect(() => {
