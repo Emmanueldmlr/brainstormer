@@ -1,5 +1,5 @@
 import Footer from "@/components/Landing/Footer/Footer";
-import { Navbar } from "@/components/Navbar/navbar";
+import Navbar from "@/components/Navbar/navbar";
 import { connectors, provider } from "@/config/wagmi";
 import "@/styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";

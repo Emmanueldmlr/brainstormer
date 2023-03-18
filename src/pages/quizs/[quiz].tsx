@@ -9,8 +9,8 @@ import {
   Button,
   chakra,
   VStack,
-  useToast,
   Checkbox,
+  useToast,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ const QuizPage = () => {
   const category = router.query.quiz as string;
   const [timeLeft, setTimeLeft] = useState(90);
   const [checked, setChecked] = useState(0);
-  const [questionNumber, setQuestionNumber] = useState(0);
+  const [questionNumber, setQuestionNumber] = useState(1);
   const [startQuiz, setStartQuiz] = useState(false);
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
@@ -31,8 +31,6 @@ const QuizPage = () => {
     { id: "C", question: "No  its me", isAnswer: false },
     { id: "D", question: "Yes me!!!", isAnswer: false },
   ]);
-
-
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -50,15 +48,8 @@ const QuizPage = () => {
   };
 
   const nextQuestion = () => {
-    if (checked === 0) {
-      toast({
-        title: "Please pick an answer",
-        description: ".",
-        status: "warning",
-        duration: 4000,
-        isClosable: true,
-      });
-    }
+    setTimeLeft(90);
+
     setChecked(0);
     setQuestionNumber(questionNumber + 1);
     setDisableNext(true);
@@ -69,7 +60,6 @@ const QuizPage = () => {
       { id: "C", question: "Choose Me", isAnswer: false },
       { id: "D", question: " I like You", isAnswer: false },
     ]);
-    setTimeLeft(90);
   };
 
   useEffect(() => {
@@ -79,20 +69,17 @@ const QuizPage = () => {
           if (timeLeft > 0) {
             return timeLeft - 1;
           } else {
-            clearInterval(timer);
             toast({
-              title: "Timer Ended,Next Question.",
+              title: "Timer Ended.",
               status: "warning",
               duration: 4000,
               isClosable: true,
             });
             nextQuestion();
-
             return 0;
           }
         });
       }, 1000);
-
       return () => clearInterval(timer);
     }
   }, [timeLeft, startQuiz]);
@@ -137,7 +124,6 @@ const QuizPage = () => {
           </Text>
         )}
       </Flex>
-
       <Flex
         gap={{ lg: "15" }}
         p={{ base: 4, md: 7 }}
