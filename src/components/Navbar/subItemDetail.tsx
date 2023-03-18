@@ -47,8 +47,8 @@ const SubMenuItem = (props: SubMenuItemProps) => {
 };
 
 const SubItemDetail = () => {
-  const { address, connector } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { address, connector, isConnected, isDisconnected } = useAccount();
+  const { disconnect, status } = useDisconnect();
   const logout = () => {
     disconnect();
   };

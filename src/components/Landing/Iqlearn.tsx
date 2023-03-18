@@ -38,7 +38,15 @@ const Iqlearn = () => {
         spacingY={12}
         px={6}
       >
-        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
+        <VStack
+          px="2"
+          shadow="md"
+          cursor="pointer"
+          py="5"
+          textAlign="center"
+          rounded="lg"
+          _hover={{ shadow: "lg" }}
+        >
           <BsFillDatabaseFill fontSize="30px" color="#ff5caa " />
           <Text fontWeight="600" fontSize="20px">
             Stake Coins
@@ -48,7 +56,15 @@ const Iqlearn = () => {
             You must have some staked IQ to earn from the program
           </Text>
         </VStack>
-        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
+        <VStack
+          px="2"
+          shadow="md"
+          cursor="pointer"
+          py="5"
+          textAlign="center"
+          rounded="lg"
+          _hover={{ shadow: "lg" }}
+        >
           <RiWallet3Fill fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Connect Wallet
@@ -58,7 +74,15 @@ const Iqlearn = () => {
             For easy remittance of IQ tokens
           </Text>
         </VStack>
-        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
+        <VStack
+          px="2"
+          shadow="md"
+          cursor="pointer"
+          py="5"
+          textAlign="center"
+          rounded="lg"
+          _hover={{ shadow: "lg" }}
+        >
           <RiFilePaper2Fill fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Take Quiz
@@ -68,7 +92,15 @@ const Iqlearn = () => {
             Put Your newfound knowledge to test
           </Text>
         </VStack>
-        <VStack px="2" shadow="md" py="5" textAlign="center" rounded="lg">
+        <VStack
+          px="2"
+          shadow="md"
+          cursor="pointer"
+          py="5"
+          textAlign="center"
+          rounded="lg"
+          _hover={{ shadow: "lg" }}
+        >
           <GiCash fontSize="30px" color="#ff5caa" />
           <Text fontWeight="600" fontSize="20px">
             Cash Out

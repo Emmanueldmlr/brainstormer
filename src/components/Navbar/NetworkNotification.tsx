@@ -39,7 +39,7 @@ export const NetworkNotification = ({
 
   const handleNetworkSwitch = () => {
     if (switchNetwork) switchNetwork(chainNoHex);
-    if (isSuccess) onClose();
+    onClose();
   };
 
   return (

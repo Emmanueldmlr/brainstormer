@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import React from "react";
+import { BraindaoLogo3 } from "../Icons/BraindaoLogo";
 
 const Herosection = () => {
   return (
@@ -13,14 +14,15 @@ const Herosection = () => {
       bgColor="#dddddd19"
     >
       <Flex
-        py={{ md: 20, base: 24 }}
+        py={{ md: 10, base: 14 }}
         w={{ lg: "80%", md: "80%", base: "95%", "2xl": "80%" }}
         mx="auto"
         flexDir="column"
         alignItems="center"
         textAlign="center"
-        gap="3"
+        gap="1"
       >
+        <BraindaoLogo3 />
         <Heading
           fontSize={{ lg: "4xl", md: "2xl", base: "xl", "2xl": "4xl" }}
           mb={{ base: 6 }}

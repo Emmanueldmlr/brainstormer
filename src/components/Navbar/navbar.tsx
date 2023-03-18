@@ -49,19 +49,12 @@ const Navbar = () => {
   const CheckNetwork = () => {
     if (isUserConnected && chain?.id !== currentNetwork.chainNoHex) {
       onOpenSwitch();
-      console.log(
-        isUserConnected,
-        isUserConnected,
-        chain?.id,
-        currentNetwork.chainNoHex
-      );
     }
   };
 
   useEffect(() => {
-    console.log(isUserConnected, "navbar here");
     CheckNetwork();
-  }, [isUserConnected, currentNetwork, address]);
+  }, [isUserConnected, currentNetwork, chain?.id, address]);
 
   const Logo = dynamic(() => import("../Elements/IqLogo"));
 

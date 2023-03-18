@@ -1,3 +1,4 @@
+import { Questions } from "@/components/Data/mockQuestions";
 import {
   Box,
   Flex,
@@ -20,17 +21,15 @@ const QuizPage = () => {
   const toast = useToast();
   const category = router.query.quiz as string;
   const [timeLeft, setTimeLeft] = useState(90);
-  const [checked, setChecked] = useState(0);
+  const [checked, setChecked] = useState("none");
   const [questionNumber, setQuestionNumber] = useState(1);
   const [startQuiz, setStartQuiz] = useState(false);
   const [disableNext, setDisableNext] = useState(true);
   const [buttonText, setButtonTest] = useState("Continue");
-  const [questions, setQuestions] = useState([
-    { id: "A", question: "Choose Me", isAnswer: true },
-    { id: "B", question: "I like You", isAnswer: false },
-    { id: "C", question: "No  its me", isAnswer: false },
-    { id: "D", question: "Yes me!!!", isAnswer: false },
-  ]);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [questions, setQuestions] = useState(
+    Questions[`Question ${questionNumber}`]
+  );
 
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
@@ -42,24 +41,22 @@ const QuizPage = () => {
     if (!startQuiz) {
       setStartQuiz(true);
       setButtonTest("Next");
-    } else if (startQuiz) {
+    } else if (startQuiz && questionNumber !== 10) {
       nextQuestion();
+    } else {
+      //calculate results and show them out
+      console.log(answers);
     }
   };
 
   const nextQuestion = () => {
+    setAnswers((answers) => [...answers, checked]);
+    const num = questionNumber + 1;
     setTimeLeft(90);
-
-    setChecked(0);
-    setQuestionNumber(questionNumber + 1);
+    setChecked("none");
+    setQuestionNumber(num);
     setDisableNext(true);
-    //set next question
-    setQuestions([
-      { id: "A", question: " No  its me", isAnswer: false },
-      { id: "B", question: "Yes me!!!", isAnswer: true },
-      { id: "C", question: "Choose Me", isAnswer: false },
-      { id: "D", question: " I like You", isAnswer: false },
-    ]);
+    setQuestions(Questions[`Question ${num}`]);
   };
 
   useEffect(() => {
@@ -140,15 +137,15 @@ const QuizPage = () => {
           </Text>
           {startQuiz ? (
             <>
-              {questions.map((item, i) => (
+              {questions.question.map((item, i) => (
                 <Checkbox
                   onChange={() => {
-                    setChecked(i + 1);
+                    setChecked(item.id);
                     setDisableNext(false);
                   }}
                   key={i}
                   colorScheme="pink"
-                  isChecked={checked === i + 1}
+                  isChecked={checked === item.id}
                   py={1}
                   value={item.id}
                 >
