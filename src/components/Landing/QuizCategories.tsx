@@ -1,3 +1,4 @@
+import { Search2Icon } from "@chakra-ui/icons";
 import {
   Box,
   chakra,
@@ -7,6 +8,9 @@ import {
   HStack,
   Text,
   VStack,
+  Input,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -29,43 +33,43 @@ const QuizCategories = () => {
           fontSize={{ lg: "4xl", md: "2xl", base: "xl", "2xl": "4xl" }}
           mb={{ base: 6 }}
         >
-          What categories are available to take tests from?
+          What wikis are available to take tests from?
         </Heading>
-        <Text fontSize={{ "2xl": "2xl", md: "lg", base: "md" }}>
-          If you have some amount staked, and you are sure of your versatility
-          ina any of these categories on IQ.wiki, Ranging from NFTs, to DeFi,
-          Cryptocurrencies and more, you can take the test to earn some more IQ
-          token
-        </Text>
+
+        <InputGroup
+          size={{ base: "md", lg: "lg" }}
+          maxW={{ base: "60%", lg: "80%" }}
+        >
+          <InputRightElement mr="15px" pointerEvents="none" h="full">
+            <Search2Icon color="gray.300" />
+          </InputRightElement>
+          <Input
+            placeholder="Search for wikis here"
+            _placeholderShown={{
+              textOverflow: "ellipsis",
+            }}
+            fontSize="16"
+          />
+        </InputGroup>
       </Flex>
-      <VStack w="full" px="24" mx="auto" gap="4" py="10">
-        {AllCategoriesData.map((item, i) => (
-          <HStack
-            key={i}
-            shadow="base"
-            rounded="lg"
-            py="2"
-            px="6"
-            w="full"
-            h="56"
-          >
-            <Flex gap="2" direction="column" alignItems="start" w="70%">
-              <Text
-                fontWeight="700"
-                fontSize={{ lg: "xl", md: "lg", base: "md", "2xl": "2xl" }}
-              >
-                {item.title}
-              </Text>
-              <Text w="90%">{item.description}</Text>
-              <Link href={`/quizs/${item.title}`}>
-                <Text color="#ff5caa" py="3" fontWeight="bold">
-                  Start Quiz
-                </Text>
-              </Link>
-            </Flex>
-            <Image src={item.heroImage} width="30%" />
-          </HStack>
-        ))}
+      <VStack w="full" px="24" mx="auto" pt="4" pb="20">
+        {/* results show here */}
+        <Image src="/rafiki.svg" alt="search wikis here" />
+        <Text
+          fontSize={{ "2xl": "4xl", md: "xl", base: "md" }}
+          fontWeight="bold"
+          pt="5"
+          pb="2"
+        >
+          Take tests on your favorite topics
+        </Text>
+
+        <Text
+          fontSize={{ "2xl": "lg", md: "md", base: "sm" }}
+          fontWeight="normal"
+        >
+          Search for wikis you would like to take tests on
+        </Text>
       </VStack>
     </Box>
   );
