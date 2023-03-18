@@ -59,13 +59,13 @@ const QuizPage = () => {
   };
 
   useEffect(() => {
-    if (startQuiz) {
+    if (startQuiz && !endQuiz) {
       const timer = setTimeout(() => {
-        setTimeLeft(timeLeft - 20);
+        setTimeLeft(timeLeft - 1);
       }, 1000);
       return () => clearTimeout(timer);
     }
-  }, [timeLeft, startQuiz]);
+  }, [timeLeft, startQuiz, endQuiz]);
 
   useEffect(() => {
     if (timeLeft < 0) {
@@ -125,7 +125,7 @@ const QuizPage = () => {
           QUIZ - {"  "}
           <chakra.span fontWeight="normal">{category}</chakra.span>
         </Heading>
-        {startQuiz && (
+        {startQuiz && !endQuiz && (
           <Text>
             Remaining time :
             <chakra.span color="pink.300" px="2" fontWeight="bold">
