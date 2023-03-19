@@ -47,6 +47,9 @@ const QuizPage = () => {
       setButtonTest("Next");
     } else if (startQuiz && questionNumber !== 10) {
       nextQuestion();
+    } else if (startQuiz && questionNumber === 10) {
+      setAnswers((answers) => [...answers, checked]);
+      setQuestionNumber(questionNumber + 1);
     }
   };
 
@@ -79,9 +82,9 @@ const QuizPage = () => {
       });
       nextQuestion();
     }
-    if (questionNumber === 10) {
+    if (questionNumber > 10) {
       setEndQuiz(true);
-      setQuestionNumber(0);
+      setQuestionNumber(1);
       const realAnswers = Object.values(Questions)
         .map((question) => question.answer[0].id)
         .filter((answerId) => answerId !== undefined);
@@ -98,18 +101,28 @@ const QuizPage = () => {
   }, [timeLeft, questionNumber]);
 
   const ReviewNext = () => {
-    const num = questionNumber + 1;
-    setQuestionNumber(num);
-    setQuestions(Questions[`Question ${num}`]);
+    if (questionNumber !== 10) {
+      const num = questionNumber + 1;
+      setQuestionNumber(num);
+      setQuestions(Questions[`Question ${num}`]);
+    } else {
+      setEndQuiz(true);
+      setQuestionNumber(1);
+      setReviewAnswers(false);
+      setStartQuiz(true);
+    }
   };
 
-  const BgColor = (i: number) => {
-    if (RealAnswers[i] === answers[i]) {
+  const BgColor = (i: number, id: string) => {
+    if (RealAnswers[i] === answers[i] && id === RealAnswers[i]) {
       return "green.300";
-    } else if (RealAnswers[i] !== answers[i]) {
+    } else if (RealAnswers[i] !== answers[i] && id === RealAnswers[i]) {
+      return "green.300";
+    } else if (RealAnswers[i] !== answers[i] && id === answers[i]) {
       return "red.300";
     }
   };
+
   return (
     <Box w="full" px="20" pt="3" pb="5">
       {startQuiz && (
@@ -158,143 +171,140 @@ const QuizPage = () => {
         rounded="lg"
         direction={{ base: "column", lg: "row" }}
       >
-        {!startQuiz && !endQuiz && (
-          <>
-            <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
-              Instructions
-            </Text>
+        <Stack order={{ base: 1, lg: 0 }} px="10" w="full" gap="2">
+          {!startQuiz && !endQuiz && (
+            <>
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+                Instructions
+              </Text>
 
-            <OrderedList>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  Total Number of Questions: <b>10</b>
-                </Text>
-              </ListItem>
-              <ListItem py="2">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  Total time limit of <b>01:30</b>
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  Must be finished at a sitting, cannot be saved for later
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  Each question gives a total of <b>1 point</b>
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  Will not let you finish without attempting all questions
-                  except in the case where your time elapses
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  There is a timer at the top of each question, ensure not to
-                  lose track of time
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  One question will be displayed per page
-                </Text>
-              </ListItem>
-              <ListItem py="1">
-                <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                  You can access previous question, within the alloted
-                  timeframe.
-                </Text>
-              </ListItem>
-            </OrderedList>
-          </>
-        )}
-        {startQuiz && !endQuiz && (
-          <>
-            <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
-              {`Question ${questionNumber} out of 10`}
-            </Text>
-            {questions.question.map((item, i) => (
-              <Checkbox
-                onChange={() => {
-                  setChecked(item.id);
-                  setDisableNext(false);
-                }}
-                key={i}
-                colorScheme="pink"
-                isChecked={checked === item.id}
-                py={1}
-                value={item.id}
-              >
-                <chakra.span color="pink.300" px="2" fontWeight="bold">
-                  {item.id}
-                </chakra.span>
-                {item.question}
-              </Checkbox>
-            ))}
-          </>
-        )}
-        {startQuiz && endQuiz && (
-          <Flex
-            w="full"
-            alignItems="center"
-            direction="column"
-            justifyContent="center"
-            gap="4"
-            py="10"
-            px="3"
-          >
-            <Text fontSize={{ base: "lg", lg: "2xl" }} fontWeight="medium">
-              Your Result
-            </Text>
-
-            <Text
-              color="pink.300"
-              fontSize={{ base: "md", lg: "xl" }}
-              fontWeight="medium"
+              <OrderedList>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    Total Number of Questions: <b>10</b>
+                  </Text>
+                </ListItem>
+                <ListItem py="2">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    Total time limit of <b>01:30</b>
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    Must be finished at a sitting, cannot be saved for later
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    Each question gives a total of <b>1 point</b>
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    Will not let you finish without attempting all questions
+                    except in the case where your time elapses
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    There is a timer at the top of each question, ensure not to
+                    lose track of time
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    One question will be displayed per page
+                  </Text>
+                </ListItem>
+                <ListItem py="1">
+                  <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
+                    You can access previous question, within the alloted
+                    timeframe.
+                  </Text>
+                </ListItem>
+              </OrderedList>
+            </>
+          )}
+          {startQuiz && !endQuiz && (
+            <>
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+                {`Question ${questionNumber} out of 10`}
+              </Text>
+              {questions.question.map((item, i) => (
+                <Checkbox
+                  onChange={() => {
+                    setChecked(item.id);
+                    setDisableNext(false);
+                  }}
+                  key={i}
+                  colorScheme="pink"
+                  isChecked={checked === item.id}
+                  py={1}
+                  value={item.id}
+                >
+                  {item.question}
+                </Checkbox>
+              ))}
+            </>
+          )}
+          {startQuiz && endQuiz && !reviewAnswers && (
+            <Flex
+              w="full"
+              alignItems="center"
+              direction="column"
+              justifyContent="center"
+              gap="4"
+              py="10"
+              px="3"
             >
-              You scored {score} /10
-            </Text>
+              <Text fontSize={{ base: "lg", lg: "2xl" }} fontWeight="medium">
+                Your Result
+              </Text>
 
-            <Button
-              size="lg"
-              fontSize="sm"
-              rounded="lg"
-              px="10"
-              color="white"
-              fontWeight="medium"
-              bg="pink.300"
-              _hover={{ bg: "pink.500", color: "gray.100" }}
-              onClick={() => setReviewAnswers(reviewAnswers)}
-            >
-              Review Answers
-            </Button>
-          </Flex>
-        )}
-        {reviewAnswers && (
-          <>
-            <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
-              {`Question ${questionNumber} out of 10`}
-            </Text>
-            {questions.question.map((item, i) => (
-              <Checkbox
-                key={i}
-                colorScheme="pink"
-                bg={BgColor(questionNumber)}
-                isDisabled
-                py={1}
-                value={item.id}
+              <Text
+                color="pink.300"
+                fontSize={{ base: "md", lg: "xl" }}
+                fontWeight="medium"
               >
-                <chakra.span color="pink.300" px="2" fontWeight="bold">
-                  {item.id}
-                </chakra.span>
-                {item.question}
-              </Checkbox>
-            ))}
-          </>
-        )}
+                You scored {score} /10
+              </Text>
+
+              <Button
+                size="lg"
+                fontSize="sm"
+                rounded="lg"
+                px="10"
+                color="white"
+                fontWeight="medium"
+                bg="pink.300"
+                _hover={{ bg: "pink.500", color: "gray.100" }}
+                onClick={() => setReviewAnswers(true)}
+              >
+                Review Answers
+              </Button>
+            </Flex>
+          )}
+          {reviewAnswers && (
+            <>
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+                {`Question ${questionNumber} out of 10`}
+              </Text>
+              {questions.question.map((item, i) => (
+                <chakra.div
+                  key={i}
+                  color="black"
+                  bg={BgColor(questionNumber - 1, item.id)}
+                  py={1}
+                >
+                  <chakra.span px="2" fontWeight="bold">
+                    {item.id}
+                  </chakra.span>
+                  {item.question}
+                </chakra.div>
+              ))}
+            </>
+          )}
+        </Stack>
       </Flex>
       {!endQuiz && (
         <chakra.div w="full" pl="3" pt="8">
