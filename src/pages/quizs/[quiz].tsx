@@ -143,15 +143,26 @@ const QuizPage = () => {
           px="6"
           gap="4"
           alignItems="center"
-          fontWeight="semibold"
           lineHeight="23px"
         >
-          <Text fontSize={{ base: "sm", lg: "md" }}>Note:</Text>
-          <VStack w="full" alignItems="start">
-            <Text fontSize={{ base: "xs", lg: "sm" }}>
-              All questions must be answered <br />
-              Your answers will automatically be submitted, if time elapses.
-            </Text>
+          <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="semibold">
+            Note:
+          </Text>
+          <VStack w="full" alignItems="start" fontWeight="400">
+            {reviewAnswers ? (
+              <Text fontSize={{ base: "xs", lg: "sm" }}>
+                The Option outlined red, is your answer, that was wrong. <br />
+                The right answer will be outlined with green.
+                <br />
+                An absence of the red outline, means you got that question
+                correctly.
+              </Text>
+            ) : (
+              <Text fontSize={{ base: "xs", lg: "sm" }}>
+                All questions must be answered. <br />
+                Your answers will automatically be submitted, if time elapses.
+              </Text>
+            )}
           </VStack>
         </Flex>
       )}
@@ -191,7 +202,7 @@ const QuizPage = () => {
               <OrderedList>
                 <ListItem py="1">
                   <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                    Total Number of Questions: <b>8</b>
+                    Total Number of Questions: <b>10</b>
                   </Text>
                 </ListItem>
                 <ListItem py="2">
@@ -290,7 +301,7 @@ const QuizPage = () => {
                 alignItems="start"
               >
                 <Text>
-                  Number of Questions : <b>8</b>
+                  Number of Questions : <b>10</b>
                 </Text>
                 <Text>
                   Total TimeSpent: <b>5:00</b>
@@ -302,7 +313,7 @@ const QuizPage = () => {
                   IQ Reward: <b>fjfj</b>
                 </Text>
                 <Text>
-                  Percentage: <b>{(score / 8) * 100} %</b>
+                  Percentage: <b>{(score / 10) * 100} %</b>
                 </Text>
                 <chakra.div
                   py="4"
