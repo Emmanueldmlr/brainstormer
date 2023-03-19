@@ -9,7 +9,7 @@ import {
   Button,
   chakra,
   VStack,
-  Checkbox,
+  Radio,
   useToast,
   Flex,
 } from "@chakra-ui/react";
@@ -123,6 +123,16 @@ const QuizPage = () => {
     }
   };
 
+  const Checked = (i: number, id: string) => {
+    if (RealAnswers[i] === answers[i] && id === RealAnswers[i]) {
+      return true;
+    } else if (RealAnswers[i] !== answers[i] && id === RealAnswers[i]) {
+      return false;
+    } else if (RealAnswers[i] !== answers[i] && id === answers[i]) {
+      return true;
+    }
+  };
+
   return (
     <Box w="full" px="20" pt="3" pb="5">
       {startQuiz && (
@@ -227,38 +237,47 @@ const QuizPage = () => {
           )}
           {startQuiz && !endQuiz && (
             <>
-              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="400">
                 {`Question ${questionNumber} out of 10`}
               </Text>
               <Text
                 fontSize={{ base: "md", lg: "lg" }}
-                pt="4"
+                pt="2"
                 fontWeight="semibold"
               >
                 {`${questionNumber}. ${questions.question}`}
               </Text>
               {questions.options.map((item, i) => (
-                <Checkbox
-                  onChange={() => {
-                    setChecked(item.id);
-                    setDisableNext(false);
-                  }}
+                <chakra.div
+                  w="full"
                   key={i}
-                  color="black"
-                  isChecked={checked === item.id}
-                  py={1}
-                  value={item.id}
+                  px="2"
+                  border="1px"
+                  borderColor="gray.200"
+                  rounded="md"
                 >
-                  <chakra.span px="2" fontWeight="bold">
-                    {item.id}
-                  </chakra.span>
-                  {item.question}
-                </Checkbox>
+                  <Radio
+                    onChange={() => {
+                      setChecked(item.id);
+                      setDisableNext(false);
+                    }}
+                    // color="black"
+                    colorScheme="pink"
+                    isChecked={checked === item.id}
+                    py={2}
+                    value={item.id}
+                  >
+                    <chakra.span px="2" fontWeight="bold">
+                      {item.id}
+                    </chakra.span>
+                    {item.question}
+                  </Radio>
+                </chakra.div>
               ))}
             </>
           )}
           {startQuiz && endQuiz && !reviewAnswers && (
-            <Flex w="full" direction="column" gap="4" py="10" px="3">
+            <Flex w="full" direction="column" gap="4" py="2" px="3">
               <Text fontSize={{ base: "sm", lg: "lg" }} fontWeight="medium">
                 Quiz Summary
               </Text>
@@ -266,7 +285,7 @@ const QuizPage = () => {
                 w="full"
                 color="black"
                 fontSize={{ base: "sm", lg: "md" }}
-                fontWeight="medium"
+                fontWeight="400"
                 spacing="2"
                 alignItems="start"
               >
@@ -294,30 +313,46 @@ const QuizPage = () => {
                   _hover={{ color: "pink.400" }}
                   onClick={() => setReviewAnswers(true)}
                 >
-                  Review Answers
+                  Review Your Answers
                 </chakra.div>
               </VStack>
             </Flex>
           )}
           {reviewAnswers && (
             <>
-              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
+              <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="400">
                 {`Question ${questionNumber} out of 10`}
               </Text>
+              <Text
+                fontSize={{ base: "md", lg: "lg" }}
+                pt="2"
+                fontWeight="semibold"
+              >
+                {`${questionNumber}. ${questions.question}`}
+              </Text>
               {questions.options.map((item, i) => (
-                <chakra.div>
-                  <Checkbox
-                    borderColor={BgColor(questionNumber - 1, item.id)}
-                    key={i}
+                <chakra.div
+                  w="full"
+                  key={i}
+                  px="2"
+                  border="1px"
+                  borderColor={
+                    BgColor(questionNumber - 1, item.id) ?? "gray.200"
+                  }
+                  rounded="md"
+                >
+                  <Radio
                     color="black"
-                    rounded="md"
-                    py={1}
+                    colorScheme="pink"
+                    py={2}
+                    isChecked={Checked(questionNumber - 1, item.id)}
+                    isReadOnly
                   >
                     <chakra.span px="2" fontWeight="bold">
                       {item.id}
                     </chakra.span>
                     {item.question}
-                  </Checkbox>
+                  </Radio>
                 </chakra.div>
               ))}
             </>

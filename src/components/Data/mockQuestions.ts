@@ -229,7 +229,7 @@ export const Questions: Quiz = {
   },
   "Question 10": {
     id: 10,
-    question: "This is Question 1",
+    question: "This is Question 10",
     options: [
       { id: "A", question: "What's the largest continent?", isAnswer: false },
       { id: "B", question: "What's the smallest continent?", isAnswer: false },
