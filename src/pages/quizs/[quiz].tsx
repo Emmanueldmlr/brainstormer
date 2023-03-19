@@ -230,18 +230,28 @@ const QuizPage = () => {
               <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
                 {`Question ${questionNumber} out of 10`}
               </Text>
-              {questions.question.map((item, i) => (
+              <Text
+                fontSize={{ base: "md", lg: "lg" }}
+                pt="4"
+                fontWeight="semibold"
+              >
+                {`${questionNumber}. ${questions.question}`}
+              </Text>
+              {questions.options.map((item, i) => (
                 <Checkbox
                   onChange={() => {
                     setChecked(item.id);
                     setDisableNext(false);
                   }}
                   key={i}
-                  colorScheme="pink"
+                  color="black"
                   isChecked={checked === item.id}
                   py={1}
                   value={item.id}
                 >
+                  <chakra.span px="2" fontWeight="bold">
+                    {item.id}
+                  </chakra.span>
                   {item.question}
                 </Checkbox>
               ))}
@@ -257,31 +267,41 @@ const QuizPage = () => {
               py="10"
               px="3"
             >
-              <Text fontSize={{ base: "lg", lg: "2xl" }} fontWeight="medium">
-                Your Result
+              <Text fontSize={{ base: "sm", lg: "lg" }} fontWeight="medium">
+                Quiz Summary
               </Text>
-
-              <Text
+              <VStack
                 color="pink.300"
                 fontSize={{ base: "md", lg: "xl" }}
                 fontWeight="medium"
+                spacing="2"
               >
-                You scored {score} /10
-              </Text>
-
-              <Button
-                size="lg"
-                fontSize="sm"
-                rounded="lg"
-                px="10"
-                color="white"
-                fontWeight="medium"
-                bg="pink.300"
-                _hover={{ bg: "pink.500", color: "gray.100" }}
-                onClick={() => setReviewAnswers(true)}
-              >
-                Review Answers
-              </Button>
+                <Text>
+                  Number of Questions : <b>8</b>
+                </Text>
+                <Text>
+                  Total TimeSpent: <b>5:00</b>
+                </Text>
+                <Text>
+                  Total points gotten : <b>{score} </b>
+                </Text>
+                <Text>
+                  IQ Reward: <b>fjfj</b>
+                </Text>
+                <Text>
+                  Percentage: <b>{(score / 8) * 100} %</b>
+                </Text>
+                <chakra.div
+                  fontSize="sm"
+                  px="10"
+                  color="pink.300"
+                  fontWeight="medium"
+                  _hover={{ color: "pink.400" }}
+                  onClick={() => setReviewAnswers(true)}
+                >
+                  Review Answers
+                </chakra.div>
+              </VStack>
             </Flex>
           )}
           {reviewAnswers && (
@@ -289,18 +309,20 @@ const QuizPage = () => {
               <Text fontSize={{ base: "md", lg: "lg" }} fontWeight="medium">
                 {`Question ${questionNumber} out of 10`}
               </Text>
-              {questions.question.map((item, i) => (
-                <chakra.div
+              {questions.options.map((item, i) => (
+                <Checkbox
                   key={i}
                   color="black"
-                  bg={BgColor(questionNumber - 1, item.id)}
+                  isDisabled
+                  borderColor={BgColor(questionNumber - 1, item.id)}
+                  rounded="md"
                   py={1}
                 >
                   <chakra.span px="2" fontWeight="bold">
                     {item.id}
                   </chakra.span>
                   {item.question}
-                </chakra.div>
+                </Checkbox>
               ))}
             </>
           )}

@@ -1,6 +1,7 @@
 export type Question = {
   id: number;
-  question: { id: string; question: string; isAnswer: boolean }[];
+  question: string;
+  options: { id: string; question: string; isAnswer: boolean }[];
   answer: { id: string; question: string; isAnswer: boolean }[];
 };
 
@@ -11,7 +12,8 @@ export type Quiz = {
 export const Questions: Quiz = {
   "Question 1": {
     id: 1,
-    question: [
+    question: "This is Question 1",
+    options: [
       { id: "A", question: "Choose Me", isAnswer: true },
       { id: "B", question: "I like You", isAnswer: false },
       { id: "C", question: "No  its me", isAnswer: false },
@@ -21,7 +23,8 @@ export const Questions: Quiz = {
   },
   "Question 2": {
     id: 2,
-    question: [
+    question: "This is Question 2",
+    options: [
       { id: "A", question: "What's your name?", isAnswer: false },
       { id: "B", question: "How old are you?", isAnswer: false },
       { id: "C", question: "Where are you from?", isAnswer: true },
@@ -31,7 +34,8 @@ export const Questions: Quiz = {
   },
   "Question 3": {
     id: 3,
-    question: [
+    question: "This is Question 3",
+    options: [
       { id: "A", question: "Which is the capital of Spain?", isAnswer: false },
       {
         id: "B",
@@ -59,7 +63,8 @@ export const Questions: Quiz = {
   },
   "Question 4": {
     id: 4,
-    question: [
+    question: "This is Question 4",
+    options: [
       {
         id: "A",
         question: "What's the largest planet in our solar system?",
@@ -91,7 +96,8 @@ export const Questions: Quiz = {
   },
   "Question 5": {
     id: 5,
-    question: [
+    question: "This is Question 5",
+    options: [
       {
         id: "A",
         question: "What's the chemical symbol for gold?",
@@ -123,7 +129,8 @@ export const Questions: Quiz = {
   },
   "Question 6": {
     id: 6,
-    question: [
+    question: "This is Question 6",
+    options: [
       {
         id: "A",
         question: "Who is the founder of Microsoft?",
@@ -139,7 +146,8 @@ export const Questions: Quiz = {
   },
   "Question 7": {
     id: 7,
-    question: [
+    question: "This is Question 7",
+    options: [
       {
         id: "A",
         question: "Who is the current president of the United States?",
@@ -171,7 +179,8 @@ export const Questions: Quiz = {
   },
   "Question 8": {
     id: 8,
-    question: [
+    question: "This is Question 8",
+    options: [
       {
         id: "A",
         question: "What's the highest-grossing movie of all time?",
@@ -203,7 +212,8 @@ export const Questions: Quiz = {
   },
   "Question 9": {
     id: 9,
-    question: [
+    question: "This is Question 9",
+    options: [
       {
         id: "A",
         question: "What's the largest animal on Earth?",
@@ -219,7 +229,8 @@ export const Questions: Quiz = {
   },
   "Question 10": {
     id: 10,
-    question: [
+    question: "This is Question 1",
+    options: [
       { id: "A", question: "What's the largest continent?", isAnswer: false },
       { id: "B", question: "What's the smallest continent?", isAnswer: false },
       {
