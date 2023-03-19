@@ -20,7 +20,7 @@ const QuizPage = () => {
   const router = useRouter();
   const toast = useToast();
   const category = router.query.quiz as string;
-  const [timeLeft, setTimeLeft] = useState(90);
+  const [timeLeft, setTimeLeft] = useState(600);
   const [score, setScore] = useState(0);
   const [checked, setChecked] = useState("none");
   const [questionNumber, setQuestionNumber] = useState(1);
@@ -56,7 +56,7 @@ const QuizPage = () => {
   const nextQuestion = () => {
     setAnswers((answers) => [...answers, checked]);
     const num = questionNumber + 1;
-    setTimeLeft(90);
+    // setTimeLeft(90);
     setChecked("none");
     setQuestionNumber(num);
     setDisableNext(true);
@@ -181,12 +181,12 @@ const QuizPage = () => {
               <OrderedList>
                 <ListItem py="1">
                   <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                    Total Number of Questions: <b>10</b>
+                    Total Number of Questions: <b>8</b>
                   </Text>
                 </ListItem>
                 <ListItem py="2">
                   <Text fontSize={{ base: "sm", lg: "md" }} fontWeight="normal">
-                    Total time limit of <b>01:30</b>
+                    Total time limit of <b>{formatTime(timeLeft)}</b>
                   </Text>
                 </ListItem>
                 <ListItem py="1">
