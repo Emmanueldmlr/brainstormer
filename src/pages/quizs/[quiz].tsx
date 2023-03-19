@@ -258,23 +258,17 @@ const QuizPage = () => {
             </>
           )}
           {startQuiz && endQuiz && !reviewAnswers && (
-            <Flex
-              w="full"
-              alignItems="center"
-              direction="column"
-              justifyContent="center"
-              gap="4"
-              py="10"
-              px="3"
-            >
+            <Flex w="full" direction="column" gap="4" py="10" px="3">
               <Text fontSize={{ base: "sm", lg: "lg" }} fontWeight="medium">
                 Quiz Summary
               </Text>
               <VStack
-                color="pink.300"
-                fontSize={{ base: "md", lg: "xl" }}
+                w="full"
+                color="black"
+                fontSize={{ base: "sm", lg: "md" }}
                 fontWeight="medium"
                 spacing="2"
+                alignItems="start"
               >
                 <Text>
                   Number of Questions : <b>8</b>
@@ -292,8 +286,9 @@ const QuizPage = () => {
                   Percentage: <b>{(score / 8) * 100} %</b>
                 </Text>
                 <chakra.div
-                  fontSize="sm"
-                  px="10"
+                  py="4"
+                  cursor="pointer"
+                  fontSize="lg"
                   color="pink.300"
                   fontWeight="medium"
                   _hover={{ color: "pink.400" }}
@@ -310,19 +305,20 @@ const QuizPage = () => {
                 {`Question ${questionNumber} out of 10`}
               </Text>
               {questions.options.map((item, i) => (
-                <Checkbox
-                  key={i}
-                  color="black"
-                  isDisabled
-                  borderColor={BgColor(questionNumber - 1, item.id)}
-                  rounded="md"
-                  py={1}
-                >
-                  <chakra.span px="2" fontWeight="bold">
-                    {item.id}
-                  </chakra.span>
-                  {item.question}
-                </Checkbox>
+                <chakra.div>
+                  <Checkbox
+                    borderColor={BgColor(questionNumber - 1, item.id)}
+                    key={i}
+                    color="black"
+                    rounded="md"
+                    py={1}
+                  >
+                    <chakra.span px="2" fontWeight="bold">
+                      {item.id}
+                    </chakra.span>
+                    {item.question}
+                  </Checkbox>
+                </chakra.div>
               ))}
             </>
           )}
