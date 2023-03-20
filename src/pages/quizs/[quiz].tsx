@@ -1,4 +1,3 @@
-// import { Questions } from "@/components/Data/mockQuestions";
 import { Questions } from "@/components/Data/realQuestions";
 import {
   Box,
@@ -76,7 +75,6 @@ const QuizPage = () => {
       }, 1000);
       return () => clearTimeout(timer);
     }
-    console.log(questions.question);
   }, [timeLeft, startQuiz, endQuiz]);
 
   useEffect(() => {
@@ -93,7 +91,8 @@ const QuizPage = () => {
       ///we send in the data for the answers and get the results
       setEndQuiz(true);
       setQuestionNumber(1);
-      setQuestions(Questions[0].questions[1]);
+      console.log(questionNumber);
+      // setQuestions(Questions[0].questions[1]);
       const count = RealAnswers.reduce((acc, val, index) => {
         if (val === answers[index]) {
           acc += 1;
@@ -313,7 +312,7 @@ const QuizPage = () => {
                   Total points gotten : <b>{score} </b>
                 </Text>
                 <Text>
-                  IQ Reward: <b></b>
+                  IQ Reward: <b>{questionNumber}</b>
                 </Text>
                 <Text>
                   Percentage: <b>{(score / 10) * 100} %</b>

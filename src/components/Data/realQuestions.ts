@@ -155,139 +155,146 @@ export const Questions: Quiz = [
       },
     ],
   },
+  {
+    id: " braindao",
+    name: "Braindao",
+    questions: [
+      {
+        id: 1,
+        question: "When did BrainDAO launch IQ.wiki?",
+        answer: "D",
+        options: [
+          { A: "January 11, 2022" },
+          { B: "wiki?" },
+          { C: "December 11, 2022" },
+          { D: "October 11, 2022" },
+        ],
+      },
+      {
+        id: 2,
+        question: "What is the mission of BrainDAO?",
+        answer: "A",
+        options: [
+          {
+            A: "To build a more intelligent future through the IQ token",
+          },
+          { B: "To act as the treasury of the IQ token" },
+          { C: "To manage the IQ token and govern the IQ stakers" },
+          {
+            D: "To create the IQ.wiki platform",
+          },
+        ],
+      },
+      {
+        id: 3,
+        question:
+          "What is the flagship decentralized application of the IQ ecosystem?",
+        answer: "A",
+        options: [
+          { A: "IQ.wiki" },
+          { B: "Chief Brain Officer Cesar Rodriguez" },
+          { C: "Galaxy Brain Navin Vethanayagam" },
+          { D: "January 2021" },
+        ],
+      },
+      {
+        id: 4,
+        question:
+          "How much Wrapped Ethereum was in BrainDAO's treasury by September 2022?",
+        answer: "C",
+        options: [
+          {
+            A: "$4 million",
+          },
+          {
+            B: "$10 million",
+          },
+          { C: "$2 million" },
+          { D: "$1 million" },
+        ],
+      },
+      {
+        id: 5,
+        question: "What is one way that BrainDAO's treasury accumulated ETH?",
+        answer: "C",
+        options: [
+          {
+            A: "Bond Protocol bonds",
+          },
+          {
+            B: "Time-Weighted Average Market Maker (TWAMM)",
+          },
+          { C: "Olympus Pro bonds" },
+          { D: "Fraxswap" },
+        ],
+      },
+      {
+        id: 6,
+        question: "What did BrainDAO do in March 2022?",
+        answer: "D",
+        options: [
+          {
+            A: "Distribute NFT Derivatives and Intellectual Property to IQ Stakers.",
+          },
+          { B: "Make its first Blue Chip NFT acquisition." },
+          {
+            C: "Pass a proposal to diversify the BrainDAO treasury by acquiring Blue Chip NFTs.",
+          },
+          {
+            D: "Pass a proposal to diversify the BrainDAO treasury by selling Blue Chip NFTs.",
+          },
+        ],
+      },
+      {
+        id: 7,
+        question: "Where does BrainApe serve as the mascot?",
+        answer: "C",
+        options: [
+          { A: "BrainApe and NFTs" },
+          { B: "DAO and BAYC holders" },
+          { C: "BrainDAO and IQ.wiki" },
+          { D: "4T pink fur Ape and IQ holders" },
+        ],
+      },
+      {
+        id: 8,
+        question: "What did BrainDAO acquire in November 2022?",
+        answer: "D",
+        options: [
+          { A: "An advertising campaign" },
+          { B: "A film franchise" },
+          { C: "Licensing fees" },
+          { D: "Pudgy Penguin #2614" },
+        ],
+      },
+      {
+        id: 9,
+        question: "When did Pudgy Penguins launch?",
+        answer: "C",
+        options: [
+          { A: "August 2021" },
+          { B: "May 2021" },
+          {
+            C: "July 2021",
+          },
+          { D: "December 2020" },
+        ],
+      },
+      {
+        id: 10,
+        question: "Why did the DAO acquire the Hashmask?",
+        answer: "C",
+        options: [
+          { A: "To have Pudgy Penguin #2614's baby pink skin." },
+          { B: "To have a hub for crypto knowledge and education." },
+          { C: "To be one of the first generative art NFTs to gain traction." },
+          { D: "To have the rare pink turtleneck trait." },
+        ],
+      },
+    ],
+  },
 ];
 
-//   "Question 10": {
-//     id: 10,
-//     question: "What proposal went up for voting on October 11, 2022?",
-//     answer: [
-//       {
-//         id: "A",
-//         question: "IQIP-14: New IQ Tokenomics for the IQ.wiki Platform",
-//         isAnswer: true,
-//       },
-//     ],
-//     options: [
-//       {
-//         id: "A",
-//         question: "IQIP-14: New IQ Tokenomics for the IQ.wiki Platform",
-//         isAnswer: false,
-//       },
-//       { id: "B", question: "Sushiswap's oSushi Token", isAnswer: false },
-//       { id: "C", question: "wiki Platform", isAnswer: false },
-//       {
-//         id: "D",
-//         question: "Setting up new tokenomics for the IQ token",
-//         isAnswer: false,
-//       },
-//     ],
-//   },
-
-//     "braindao": [
-//         {
-//             "question": "When did BrainDAO launch IQ.wiki?",
-//             "answer": "October 11, 2022",
-//             "distractors": [
-//                 "January 11, 2022",
-//                 "wiki?",
-//                 "December 11, 2022",
-//                 "April 11, 2022",
-//                 "October 11, 2022"
-//             ]
-//         },
-//         {
-//             "question": "What is the mission of BrainDAO?",
-//             "answer": "To build a more intelligent future through the IQ token",
-//             "distractors": [
-//                 "To build a more intelligent future through the IQ token",
-//                 "To act as the treasury of the IQ token",
-//                 "To manage the IQ token and govern the IQ stakers",
-//                 "To create the IQ.wiki platform"
-//             ]
-//         },
-//         {
-//             "question": "What is the flagship decentralized application of the IQ ecosystem?",
-//             "answer": "IQ.wiki",
-//             "distractors": [
-//                 "BrainDAO",
-//                 "Chief Brain Officer Cesar Rodriguez",
-//                 "IQ.wiki",
-//                 "wiki",
-//                 "Galaxy Brain Navin Vethanayagam"
-//             ]
-//         },
-//         {
-//             "question": "How much Wrapped Ethereum was in BrainDAO's treasury by September 2022?",
-//             "answer": "$2 million",
-//             "distractors": [
-//                 "$4 million",
-//                 "$10 million",
-//                 "$2 million",
-//                 "$1 million"
-//             ]
-//         },
-//         {
-//             "question": "What is one way that BrainDAO's treasury accumulated ETH?",
-//             "answer": "Olympus Pro bonds",
-//             "distractors": [
-//                 "Bond Protocol bonds",
-//                 "Time-Weighted Average Market Maker (TWAMM)",
-//                 "Olympus Pro bonds",
-//                 "Fraxswap"
-//             ]
-//         },
-//         {
-//             "question": "What did BrainDAO do in March 2022?",
-//             "answer": "Pass a proposal to diversify the BrainDAO treasury by acquiring Blue Chip NFTs.",
-//             "distractors": [
-//                 "Distribute NFT Derivatives and Intellectual Property to IQ Stakers.",
-//                 "Make its first Blue Chip NFT acquisition.",
-//                 "Pass a proposal to diversify the BrainDAO treasury by acquiring Blue Chip NFTs.",
-//                 "Pass a proposal to diversify the BrainDAO treasury by selling Blue Chip NFTs."
-//             ]
-//         },
-//         {
-//             "question": "Where does BrainApe serve as the mascot?",
-//             "answer": "BrainDAO and IQ.wiki",
-//             "distractors": [
-//                 "BrainApe and NFTs",
-//                 "DAO and BAYC holders",
-//                 "BrainDAO and IQ.wiki",
-//                 "4T pink fur Ape and IQ holders",
-//                 "wiki"
-//             ]
-//         },
-//         {
-//             "question": "What did BrainDAO acquire in November 2022?",
-//             "answer": "Pudgy Penguin #2614",
-//             "distractors": [
-//                 "An advertising campaign",
-//                 "A film franchise",
-//                 "Licensing fees",
-//                 "Pudgy Penguin #2614"
-//             ]
-//         },
-//         {
-//             "question": "When did Pudgy Penguins launch?",
-//             "answer": "July 2021",
-//             "distractors": [
-//                 "August 2021",
-//                 "May 2021",
-//                 "July 2021",
-//                 "December 2020"
-//             ]
-//         },
-//         {
-//             "question": "Why did the DAO acquire the Hashmask?",
-//             "answer": "To be one of the first generative art NFTs to gain traction.",
-//             "distractors": [
-//                 "To have Pudgy Penguin #2614's baby pink skin.",
-//                 "To have a hub for crypto knowledge and education.",
-//                 "To be one of the first generative art NFTs to gain traction.",
-//                 "To have the rare pink turtleneck trait."
-//             ]
-//         }
-//     ],
 //     "theodor-forselius": [
 //         {
 //             "question": "At what age did Theodor Forselius co-found IQ.wiki?",
