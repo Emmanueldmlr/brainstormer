@@ -1,4 +1,5 @@
-import { Questions } from "@/components/Data/mockQuestions";
+// import { Questions } from "@/components/Data/mockQuestions";
+import { Questions } from "@/components/Data/realQuestions";
 import {
   Box,
   Heading,
@@ -31,10 +32,12 @@ const QuizPage = () => {
   const [buttonText, setButtonTest] = useState("Continue");
   const [answers, setAnswers] = useState<string[]>([]);
   const [RealAnswers, setRealAnswers] = useState<string[]>([]);
+  const [timeUsed, setTimeUsed] = useState("");
   const [questions, setQuestions] = useState(
-    Questions[`Question ${questionNumber}`]
+    Questions[0].questions[questionNumber - 1]
   );
 
+  let options = ["A", "B", "C", "D"];
   const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -43,6 +46,7 @@ const QuizPage = () => {
 
   const ContiueandNext = () => {
     if (!startQuiz) {
+      ///////set start exam
       setStartQuiz(true);
       setButtonTest("Next");
     } else if (startQuiz && questionNumber !== 10) {
@@ -50,17 +54,17 @@ const QuizPage = () => {
     } else if (startQuiz && questionNumber === 10) {
       setAnswers((answers) => [...answers, checked]);
       setQuestionNumber(questionNumber + 1);
+      setTimeUsed(formatTime(600 - timeLeft));
     }
   };
 
   const nextQuestion = () => {
     setAnswers((answers) => [...answers, checked]);
     const num = questionNumber + 1;
-    // setTimeLeft(90);
     setChecked("none");
     setQuestionNumber(num);
     setDisableNext(true);
-    setQuestions(Questions[`Question ${num}`]);
+    setQuestions(Questions[0].questions[num - 1]);
   };
 
   useEffect(() => {
@@ -83,11 +87,11 @@ const QuizPage = () => {
       nextQuestion();
     }
     if (questionNumber > 10) {
+      ///we send in the data for the answers and get the results back
       setEndQuiz(true);
       setQuestionNumber(1);
-      const realAnswers = Object.values(Questions)
-        .map((question) => question.answer[0].id)
-        .filter((answerId) => answerId !== undefined);
+      
+      const realAnswers: string[] = [];
 
       const count = realAnswers.reduce((acc, val, index) => {
         if (val === answers[index]) {
@@ -104,7 +108,7 @@ const QuizPage = () => {
     if (questionNumber !== 10) {
       const num = questionNumber + 1;
       setQuestionNumber(num);
-      setQuestions(Questions[`Question ${num}`]);
+      setQuestions(Questions[0].questions[num - 1]);
     } else {
       setEndQuiz(true);
       setQuestionNumber(1);
@@ -269,19 +273,19 @@ const QuizPage = () => {
                 >
                   <Radio
                     onChange={() => {
-                      setChecked(item.id);
+                      setChecked(options[i]);
                       setDisableNext(false);
                     }}
                     // color="black"
                     colorScheme="pink"
-                    isChecked={checked === item.id}
+                    isChecked={checked === options[i]}
                     py={2}
                     value={item.id}
                   >
                     <chakra.span px="2" fontWeight="bold">
-                      {item.id}
+                      {options[i]}
                     </chakra.span>
-                    {item.question}
+                    {item[options[i]]}
                   </Radio>
                 </chakra.div>
               ))}
@@ -304,13 +308,13 @@ const QuizPage = () => {
                   Number of Questions : <b>10</b>
                 </Text>
                 <Text>
-                  Total TimeSpent: <b>5:00</b>
+                  Total TimeSpent: <b>{timeUsed}</b>
                 </Text>
                 <Text>
                   Total points gotten : <b>{score} </b>
                 </Text>
                 <Text>
-                  IQ Reward: <b>fjfj</b>
+                  IQ Reward: <b></b>
                 </Text>
                 <Text>
                   Percentage: <b>{(score / 10) * 100} %</b>
