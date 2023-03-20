@@ -11,6 +11,15 @@ export type Quiz = {
   }[];
 }[];
 
+export type answers = {
+  scripts: answerScripts[];
+  exam_id: string;
+};
+export type answerScripts = {
+  id: number;
+  question: string;
+  selectedAnswer: string;
+};
 export const Questions: Quiz = [
   {
     id: " iq_token",

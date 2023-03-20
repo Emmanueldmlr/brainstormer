@@ -53,6 +53,7 @@ const QuizPage = () => {
       nextQuestion();
     } else if (startQuiz && questionNumber === 10) {
       setAnswers((answers) => [...answers, checked]);
+      setRealAnswers((RealAnswers) => [...RealAnswers, questions.answer]);
       setQuestionNumber(questionNumber + 1);
       setTimeUsed(formatTime(600 - timeLeft));
     }
@@ -60,6 +61,7 @@ const QuizPage = () => {
 
   const nextQuestion = () => {
     setAnswers((answers) => [...answers, checked]);
+    setRealAnswers((RealAnswers) => [...RealAnswers, questions.answer]);
     const num = questionNumber + 1;
     setChecked("none");
     setQuestionNumber(num);
@@ -74,6 +76,7 @@ const QuizPage = () => {
       }, 1000);
       return () => clearTimeout(timer);
     }
+    console.log(questions.question);
   }, [timeLeft, startQuiz, endQuiz]);
 
   useEffect(() => {
@@ -87,19 +90,16 @@ const QuizPage = () => {
       nextQuestion();
     }
     if (questionNumber > 10) {
-      ///we send in the data for the answers and get the results back
+      ///we send in the data for the answers and get the results
       setEndQuiz(true);
       setQuestionNumber(1);
-      
-      const realAnswers: string[] = [];
-
-      const count = realAnswers.reduce((acc, val, index) => {
+      setQuestions(Questions[0].questions[1]);
+      const count = RealAnswers.reduce((acc, val, index) => {
         if (val === answers[index]) {
           acc += 1;
         }
         return acc;
       }, 0);
-      setRealAnswers(realAnswers);
       setScore(count);
     }
   }, [timeLeft, questionNumber]);
@@ -276,7 +276,6 @@ const QuizPage = () => {
                       setChecked(options[i]);
                       setDisableNext(false);
                     }}
-                    // color="black"
                     colorScheme="pink"
                     isChecked={checked === options[i]}
                     py={2}
@@ -352,7 +351,7 @@ const QuizPage = () => {
                   px="2"
                   border="1px"
                   borderColor={
-                    BgColor(questionNumber - 1, item.id) ?? "gray.200"
+                    BgColor(questionNumber - 1, options[i]) ?? "gray.200"
                   }
                   rounded="md"
                 >
@@ -360,13 +359,13 @@ const QuizPage = () => {
                     color="black"
                     colorScheme="pink"
                     py={2}
-                    isChecked={Checked(questionNumber - 1, item.id)}
+                    isChecked={Checked(questionNumber - 1, options[i])}
                     isReadOnly
                   >
                     <chakra.span px="2" fontWeight="bold">
-                      {item.id}
+                      {options[i]}
                     </chakra.span>
-                    {item.question}
+                    {item[options[i]]}
                   </Radio>
                 </chakra.div>
               ))}
