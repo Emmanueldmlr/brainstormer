@@ -36,7 +36,7 @@ const QuizCategories = () => {
           What wikis are available to take tests from?
         </Heading>
 
-        <InputGroup
+        {/* <InputGroup
           size={{ base: "md", lg: "lg" }}
           maxW={{ base: "60%", lg: "80%" }}
         >
@@ -50,10 +50,10 @@ const QuizCategories = () => {
             }}
             fontSize="16"
           />
-        </InputGroup>
+        </InputGroup> */}
       </Flex>
-      <VStack w="full" px="24" mx="auto" pt="4" pb="20">
-        {/* results show here */}
+      {/* <VStack w="full" px="24" mx="auto" pt="4" pb="20">
+       
         <Image src="/rafiki.svg" alt="search wikis here" />
         <Text
           fontSize={{ "2xl": "4xl", md: "xl", base: "md" }}
@@ -70,9 +70,13 @@ const QuizCategories = () => {
         >
           Search for wikis you would like to take tests on
         </Text>
-      </VStack>
+      </VStack> */}
+
     </Box>
   );
 };
 
 export default QuizCategories;
+
+
+// query the db and get the wikis that they take quiz on

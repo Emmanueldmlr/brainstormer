@@ -9,6 +9,7 @@ import {
   FlexProps,
   Text,
   useClipboard,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { IconType } from "react-icons";
@@ -20,6 +21,9 @@ import {
 } from "react-icons/ri";
 import { useAccount, useDisconnect } from "wagmi";
 import { Polygon } from "../Icons/polygon";
+import { SiBitcoincash } from "react-icons/si";
+import { BraindaoLogo3 } from "../Icons/BraindaoLogo";
+import { HStack } from "@chakra-ui/layout";
 
 type SubMenuItemProps = {
   label: string;
@@ -94,11 +98,12 @@ const SubItemDetail = () => {
         </Flex>
         <Flex
           mb="9"
-          mt="4.5"
+          mt="6"
           rounded="md"
           bg="gray.100"
           p="3"
           direction="column"
+          gap="6"
         >
           <Flex align="space-between" gap="4">
             <Icon as={Polygon} fontSize="2xl" />
@@ -106,6 +111,33 @@ const SubItemDetail = () => {
               Polygon Mumbai
             </Text>
           </Flex>
+          <Flex justifyContent="space-between" gap="4">
+            <HStack>
+              <Icon as={BraindaoLogo3} fontSize="2xl" />
+              <Text color="dimmedText" fontWeight="semibold">
+                Current Reward Bal:
+              </Text>
+            </HStack>
+
+            <Text color="dimmedText" fontWeight="bold">
+              {" "}
+              0
+            </Text>
+          </Flex>
+          <Link
+            target="_blank"
+            href="https://iq.braindao.org/dashboard/stake"
+            _hover={{ textDecoration: "none" }}
+            gap="4"
+            w="full"
+          >
+            <HStack>
+              <Icon as={BraindaoLogo3} fontSize="2xl" />
+              <Text fontWeight="semibold" color="pink.300">
+                Check your staking balance
+              </Text>
+            </HStack>
+          </Link>
 
           {/* {balanceBreakdown &&
         userBalance &&

@@ -22,7 +22,7 @@ const Herosection = () => {
         textAlign="center"
         gap="1"
       >
-        <BraindaoLogo3 />
+        <BraindaoLogo3 w="full" />
         <Heading
           fontSize={{ lg: "4xl", md: "2xl", base: "xl", "2xl": "4xl" }}
           mb={{ base: 6 }}
