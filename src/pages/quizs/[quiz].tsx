@@ -19,7 +19,7 @@ import React, { useEffect, useState } from "react";
 const QuizPage = () => {
   const router = useRouter();
   const toast = useToast();
-  const category = router.query.quiz as string;
+  const category = Number(router.query.quiz);
   const [timeLeft, setTimeLeft] = useState(600);
   const [score, setScore] = useState(0);
   const [checked, setChecked] = useState("none");
@@ -33,7 +33,7 @@ const QuizPage = () => {
   const [RealAnswers, setRealAnswers] = useState<string[]>([]);
   const [timeUsed, setTimeUsed] = useState("");
   const [questions, setQuestions] = useState(
-    Questions[0].questions[questionNumber - 1]
+    Questions[category - 1].questions[questionNumber - 1]
   );
 
   let options = ["A", "B", "C", "D"];
@@ -65,7 +65,7 @@ const QuizPage = () => {
     setChecked("none");
     setQuestionNumber(num);
     setDisableNext(true);
-    setQuestions(Questions[0].questions[num - 1]);
+    setQuestions(Questions[category - 1].questions[num - 1]);
   };
 
   useEffect(() => {
@@ -92,7 +92,6 @@ const QuizPage = () => {
       setEndQuiz(true);
       setQuestionNumber(1);
       console.log(questionNumber);
-      // setQuestions(Questions[0].questions[1]);
       const count = RealAnswers.reduce((acc, val, index) => {
         if (val === answers[index]) {
           acc += 1;
@@ -107,7 +106,7 @@ const QuizPage = () => {
     if (questionNumber !== 10) {
       const num = questionNumber + 1;
       setQuestionNumber(num);
-      setQuestions(Questions[0].questions[num - 1]);
+      setQuestions(Questions[category - 1].questions[num - 1]);
     } else {
       setEndQuiz(true);
       setQuestionNumber(1);
@@ -175,8 +174,8 @@ const QuizPage = () => {
           fontSize={{ base: "xl", lg: "2xl" }}
           pb="5"
         >
-          QUIZ - {"  "}
-          <chakra.span fontWeight="normal">{category}</chakra.span>
+          QUIZ -{" "}
+          <chakra.span fontWeight="normal">{Questions[category - 1].name}</chakra.span>
         </Heading>
         {startQuiz && !endQuiz && (
           <Text>

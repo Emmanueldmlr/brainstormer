@@ -82,7 +82,11 @@ const QuizCategories = () => {
           borderColor="gray.200"
           gap="3"
         >
-          <Image src="./categories/dapps.jpg" w="30%" />
+          <Image
+            src="https://iq.wiki/_next/image?url=https%3A%2F%2Fipfs.everipedia.org%2Fipfs%2FQmZLndzstmC3ZmnWFQj5pyqCar1g1ZH7hQ6DprijivMw4K&w=640&q=95"
+            w="20%"
+            rounded="lg"
+          />
 
           <VStack direction="column" gap="3" w="full">
             <Flex
@@ -91,16 +95,96 @@ const QuizCategories = () => {
               pr="3"
               fontWeight="semibold"
             >
-              <Text>JOE LUBIN</Text>
-              <Text color="pink.300">People in Crypto</Text>
+              <Text>IQ TOKEN </Text>
+              <Text color="pink.300">Cryptocurrencies</Text>
             </Flex>
-            <Text fontSize={{ "2xl": "2xl", md: "md", base: "sm" }}>
-              Joe Lubin is a canadian entrepreneur and blockchain pioneer. He is
-              best known as one of the co-founders of Ethereum, a day platform
-              that enables the creation of decentralized applications (dApps).
+            <Text fontSize={{ "2xl": "lg", md: "16px", base: "sm" }}>
+              The IQ token is a cryptocurrency dedicated to building a more
+              intelligent future through artificial intelligence and blockchain
+              technology. The IQ token powers a knowledge ecosystem...
             </Text>
             <chakra.div w="full">
-              <Link href={`/quizs/iq_token`}>
+              <Link href={`/quizs/1`}>
+                <Text fontSize="lg" color="pink.300" fontWeight="semibold">
+                  Take Quiz
+                </Text>
+              </Link>
+            </chakra.div>
+          </VStack>
+        </HStack>
+        <HStack
+          py="4"
+          px="3"
+          bg="white"
+          shadow="md"
+          rounded="lg"
+          border="1px"
+          borderColor="gray.200"
+          gap="3"
+        >
+          <Image
+            src="https://iq.wiki/_next/image?url=https%3A%2F%2Fipfs.everipedia.org%2Fipfs%2FQmSKQvE1XRvBYNDjxwv1YjVxgQUpmdJ7FazGE5M8WKcZZq&w=640&q=95"
+            w="20%"
+            rounded="lg"
+          />
+
+          <VStack direction="column" gap="3" w="full">
+            <Flex
+              justifyContent="space-between"
+              w="full"
+              pr="3"
+              fontWeight="semibold"
+            >
+              <Text>Braindao</Text>
+              <Text color="pink.300">DAOs</Text>
+            </Flex>
+            <Text fontSize={{ "2xl": "lg", md: "16px", base: "sm" }}>
+              BrainDAO is the governing DAO of the IQ ecosystem. BrainDAO's
+              mission is to build a more intelligent future through the IQ
+              token...
+            </Text>
+            <chakra.div w="full">
+              <Link href={`/quizs/2`}>
+                <Text fontSize="lg" color="pink.300" fontWeight="semibold">
+                  Take Quiz
+                </Text>
+              </Link>
+            </chakra.div>
+          </VStack>
+        </HStack>
+        <HStack
+          py="4"
+          px="3"
+          bg="white"
+          shadow="md"
+          rounded="lg"
+          border="1px"
+          borderColor="gray.200"
+          gap="3"
+        >
+          <Image
+            src="https://iq.wiki/_next/image?url=https%3A%2F%2Fipfs.everipedia.org%2Fipfs%2FQmUmUpVxoL2bFYx3wmdkniMQ7rEmesKcotWbesDT33ZnPX&w=640&q=95"
+            w="20%"
+            rounded="lg"
+          />
+
+          <VStack direction="column" gap="3" w="full">
+            <Flex
+              justifyContent="space-between"
+              w="full"
+              pr="3"
+              fontWeight="semibold"
+            >
+              <Text>Theodor Forselius</Text>
+              <Text color="pink.300">People in Crypto</Text>
+            </Flex>
+            <Text fontSize={{ "2xl": "lg", md: "16px", base: "sm" }}>
+              Theodor grew up in Jönköping, Sweden. When he was 11 years old he
+              founded an online gaming community that hosted online servers for
+              i...
+            </Text>
+            <chakra.div w="full">
+              <Link href={`/quizs/3`}>
                 <Text fontSize="lg" color="pink.300" fontWeight="semibold">
                   Take Quiz
                 </Text>
